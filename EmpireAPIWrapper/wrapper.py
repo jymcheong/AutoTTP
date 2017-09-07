@@ -359,6 +359,16 @@ class agents(object):
         """
         final_url = '/api/agents/{}/shell'.format(agent_name)
         return utilties._postURL(self, final_url, payload=options)
+    
+    def agent_run_shell_cmd_with_result(self, agent_name, options, timeout=120):
+        """
+        Task agent to run shell commdn with results returned directly
+        :param agent_name: Agent name
+        :param options: Dict of command
+        :rtype: dict
+        """
+        r = self.agent_run_shell_cmd(agent_name, options)
+        return self.agent_get_results(agent_name, r['taskID'], timeout)
 
     def agent_rename(self, current_name, new_name):
         """
@@ -528,6 +538,10 @@ class empireAPI(utilties, admin, reporting, stagers, modules, agents, listeners)
         :return: URI in a string.
         """
         return '{base}:{port}{location}'.format(base=self.host, port=self.port, location=resource_location)
+    
+    def module_exec_with_result(self, module_path, options, agent_name, timeout=120):
+        r = self.module_exec(module_path, options)
+        return self.agent_get_results(agent_name, r['taskID'], timeout)
 
 class methods:
     """All HTTP methods in use"""

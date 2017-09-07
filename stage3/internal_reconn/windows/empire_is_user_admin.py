@@ -18,8 +18,7 @@ def run(API, agent_name):
     agent_details = API.agent_info(agent_name)['agents'][0]
     # either local/domain user, still check if user is in local administrators
     opts = {'Agent': agent_name, 'command': 'net localgroup Administrators'}
-    r = API.agent_run_shell_cmd(agent_name, opts)
-    localadmin_query_result = API.agent_get_results(agent_name, r['taskID'])    
+    localadmin_query_result = API.agent_run_shell_cmd_with_result(agent_name, opts)
     if localadmin_query_result is None:
         raise ValueError('fail to run "net localgroup Administrator", check empire console')
     
@@ -32,12 +31,10 @@ def run(API, agent_name):
         target_username = agent_details['username'].split('\\')[1]
         # options for the module, required options are prefixed
         opts = situational_awareness.network_powerview_get_group.options
-        r = API.module_exec(situational_awareness.network_powerview_get_group.path, \
-                            { opts.username: target_username,
-                              opts.required_agent: agent_name})
-        # there are other types of admin eg. Enterprise, Schema Admin...
-        if 'Admin' in API.agent_get_results(agent_name, r['taskID']): 
-            return 'Domain'
+        if 'Admin' in API.module_exec_with_result(situational_awareness.network_powerview_get_group.path, \
+                                        { opts.username: target_username,
+                                        opts.required_agent: agent_name}, agent_name):
+            return 'Domain' # there are other types of admin eg. Enterprise, Schema Admin..            
         # 3rd case, a domain user could be added to local admin group
         if agent_details['username'] in localadmin_query_result:
             return 'Local'
@@ -47,4 +44,4 @@ if __name__ == '__main__': # unit test
     API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
     # run(API, 'fuck') # exception if no agent of that name
     # to test this unit, we setup VMs (client + domain) to test the 3 cases
-    print(run(API, '3LNCZ41M'))
+    print(run(API, 'C1HWL6KS'))
