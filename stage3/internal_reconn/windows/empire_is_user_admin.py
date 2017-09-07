@@ -15,7 +15,10 @@ def run(API, agent_name):
     :param agent_name: name of agent
     :return type: str or None
     """
-    agent_details = API.agent_info(agent_name)['agents'][0]
+    agent = API.agent_info(agent_name)['agents']
+    if len(agent) == 0: # checks for no agents at all or no such agent
+        raise ValueError('No agent')
+    agent_details = agent[0]
     # either local/domain user, still check if user is in local administrators
     opts = {'Agent': agent_name, 'command': 'net localgroup Administrators'}
     localadmin_query_result = API.agent_run_shell_cmd_with_result(agent_name, opts)
@@ -44,4 +47,4 @@ if __name__ == '__main__': # unit test
     API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
     # run(API, 'fuck') # exception if no agent of that name
     # to test this unit, we setup VMs (client + domain) to test the 3 cases
-    print(run(API, 'C1HWL6KS'))
+    print(run(API, '2EZWRF85'))
