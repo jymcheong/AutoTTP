@@ -14,7 +14,7 @@ Each "Tactics" row is associated to a "Stage". If you look into the source tree,
 
 ![](screenshots/procedureVStechniques.png)
 
-The [file on the left](https://github.com/jymcheong/AutoTTP/blob/master/bypassUAC_procedure_example.py) is a procedure script, the other one is a [technique script](https://github.com/jymcheong/AutoTTP/blob/master/stage3/internal_reconn/windows/empire_is_user_admin.py). You will notice procedure scripting is not littered with too many Empire specific details, much of the details are encapsulated in technique script. 
+The [file on the left](https://github.com/jymcheong/AutoTTP/blob/master/bypassUAC_procedure_example.py) is a procedure script, the other one is a [technique script](https://github.com/jymcheong/AutoTTP/blob/master/stage3/internal_reconn/windows/empire_is_user_admin.py). Notice that procedure scripting is not littered with too many Empire specific details, much of the details are encapsulated in the technique script. Procedure scripting should focus on the assets' information eg. hostname/ip, which email to send payload to, which payload technique & so on.
 
 The example of *"is user admin?"* actually consists of a few steps since there are at least 3 possibilities as spelt out in the script's comments. We can of course create custom "macros" in Empire, Metasploit & what not, but it becomes tightly integrated within a particular framework/product. We want to take advantage of the tools out there & organize reusable techniques into modules so as to mix & match at a Procedural level (ie. the automation).
 
