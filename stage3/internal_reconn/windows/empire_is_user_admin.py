@@ -24,13 +24,13 @@ def run(API, agent_name):
     localadmin_query_result = API.agent_run_shell_cmd_with_result(agent_name, opts)
     if localadmin_query_result is None:
         raise ValueError('fail to run "net localgroup Administrator", check empire console')
-    
-    # first case: for a local user (will always be host\username), check if s/he is local admin group
-    if agent_details['hostname'] in agent_details['username']: 
+
+    # first case: for a local user, check if s/he is local admin group
+    if agent_details['hostname'] in agent_details['username']:
         target_username = agent_details['username'].replace(agent_details['hostname']+'\\', "")
         if target_username in localadmin_query_result:
             return "Local"
-    else: # 2nd case, for a domain user, we check if its in Domain/Local Admin 
+    else: # 2nd case, for a domain user, we check if its in Domain/Local Admin
         target_username = agent_details['username'].split('\\')[1]
         # options for the module, required options are prefixed (required_*)
         opts = situational_awareness.network_powerview_get_group.options
