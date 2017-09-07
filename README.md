@@ -4,7 +4,7 @@ Automated Tactics Techniques &amp; Procedures. Re-running complex sequences manu
 ## What is TTP?
 ![](screenshots/ttp.png)
 
-In our case, the tactics are organized as per my [Attack Life Cycle model](https://jym.sg). One can use other models like Lockheed Martin's Kill-Chain(tm), Mandiant Attack Life Cycle & Mitre's ATT&CK (for post-exploitation). Whichever model it my be, *"Tactics" essentially help us group techniques together*:
+In my case, the tactics are organized as per my [Attack Life Cycle model](https://jym.sg). There are other models like Lockheed Martin's Kill-Chain(tm), Mandiant Attack Life Cycle & Mitre's ATT&CK (for post-exploitation). Whichever model it my be, *a "Tactic" essentially groups techniques together*, eg. code-execution/run-payload can be achieved with many ways:
 
 ![](screenshots/ALCmatrix.png)
 
