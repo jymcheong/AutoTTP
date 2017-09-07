@@ -540,6 +540,15 @@ class empireAPI(utilties, admin, reporting, stagers, modules, agents, listeners)
         return '{base}:{port}{location}'.format(base=self.host, port=self.port, location=resource_location)
     
     def module_exec_with_result(self, module_path, options, agent_name, timeout=120):
+        """
+        Execute the given module with the specified options
+        Requires Agent to be in options
+        :param module_path: module path string
+        :param options: Dictionary of module options
+        :param agent_name: agent name string
+        :param timeout: time out in seconds integer
+        :rtype: dict
+        """
         r = self.module_exec(module_path, options)
         return self.agent_get_results(agent_name, r['taskID'], timeout)
 
