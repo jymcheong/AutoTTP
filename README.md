@@ -21,14 +21,12 @@ The example of *"is user admin?"* actually consists of a few steps since there a
 ## How to make it easier?
 ![](screenshots/autocomplete.png)
 
-I took advantage of the well-structured modules in Empire to create a auto-complete python class, instead of typing the full module name (eg. powershell/situational_awareness....) but make use of the IDE's autocomplete capabilities.
+I took advantage of the well-structured modules in Empire to create a auto-complete python class. Instead of typing the full module name (eg. powershell/situational_awareness....), just use IDE's autocomplete capabilities.
 
 ![](screenshots/requiredoptions.png)
 
-For each module, there will be options (for most if not all frameworks). The thing with Empire is once you run it as rest/headless (will touch on this later), there is NO console to look at the options. In the autocomplete helper class, each module has a *options* sub-class. The required options are prefix so we can populate them with values before running a module. 
-
-Since there are 276 modules (as of Empire 2.1), this helper class will need some automation to create too! Source: [https://gist.github.com/jymcheong/22c2eede978c8eb694945e3347c20c6b](https://gist.github.com/jymcheong/22c2eede978c8eb694945e3347c20c6b)
+For each module, there will be options (for most if not all frameworks). The thing with Empire is once you run it as rest/headless (will touch on this later), there is NO console to look at the options. In the autocomplete helper class, each module has a *options* sub-class. The required options are prefix so we can populate them with values before running a module. Since there are 276 modules (as of Empire 2.1), this helper class will need some scripting to create too! Source: [https://gist.github.com/jymcheong/22c2eede978c8eb694945e3347c20c6b](https://gist.github.com/jymcheong/22c2eede978c8eb694945e3347c20c6b)
 
 ## Empire running with RESTful API & Console
-As much we want to do everything in IDE, you will need console. The author of [DeathStar](https://github.com/byt3bl33d3r/DeathStar), already knew that while developing that script that automates the 0wning of Domain Admin using Empire. I borrowed his idea but adapted the threading approach for Empire 2.1 since his approach won't work for the refactored start_restful_api(). Source: [https://gist.github.com/jymcheong/6a7668ecf73c29dd1d234d1c76ef438c](https://gist.github.com/jymcheong/6a7668ecf73c29dd1d234d1c76ef438c)
+As much we want to do everything in IDE, you will need console. The author of [DeathStar](https://github.com/byt3bl33d3r/DeathStar), already knew that while developing that script that automates the 0wning of Domain Admin using Empire. I borrowed his idea but adapted the threading approach for Empire 2.1 since his approach won't work for the refactored start restful api function. Source: [https://gist.github.com/jymcheong/6a7668ecf73c29dd1d234d1c76ef438c](https://gist.github.com/jymcheong/6a7668ecf73c29dd1d234d1c76ef438c)
 
