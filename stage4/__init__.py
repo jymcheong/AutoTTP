@@ -1,0 +1,1 @@
+"""Steal (Confidentiality), Tamper (Integrity) & Deny (Availability)"""
