@@ -400,7 +400,7 @@ class agents(object):
 
     def agent_get_results(self, agent_name, task_id, time_out=120):
         """
-        Return tasking results for the agent
+        Return task results for the agent
         :param agent_name: Agent name as string
         :param task_id: task ID from agent tasking
         :rtype: str or None if failed
