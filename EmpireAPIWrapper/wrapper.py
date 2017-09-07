@@ -406,8 +406,7 @@ class agents(object):
         :rtype: str or None if failed
         """
         final_url = '/api/agents/{}/results'.format(agent_name)
-        result = None
-        while True:
+        while time_out > 0:
             r = utilties._getURL(self, final_url)
             for result in r['results']:
                 if task_id == result['taskID']:
@@ -415,8 +414,7 @@ class agents(object):
                         return result['results']
             time.sleep(1)
             time_out -= 1
-        
-        return result
+        return None
 
     def agent_get_name(self, hostname_or_ipaddr, high_integrity=False):
         """
