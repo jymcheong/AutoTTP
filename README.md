@@ -34,7 +34,7 @@ The description of each module is also included as part of the python class docu
 With IDEs like Visual Studio Code (or equivalent), one can take advantage of debug variable watch, step through the script or even modify the script *while debugging/stepping* after knowing the return values structure. The REST APIs docs are there for Empire, but sometimes we don't exactly know the return values until we run the module. For that reason, it leads to the next topic.
 
 ## Empire running with RESTful API & Console
-As much we want to do everything in IDE, you will need console. The author of [DeathStar](https://github.com/byt3bl33d3r/DeathStar), already knew that while developing that script that automates the 0wning of Domain Admin using Empire. I borrowed his idea but adapted the threading approach for Empire 2.1 since his approach won't work for the refactored start restful api function. Source: [https://gist.github.com/jymcheong/6a7668ecf73c29dd1d234d1c76ef438c](https://gist.github.com/jymcheong/6a7668ecf73c29dd1d234d1c76ef438c)
+As much we want to do everything in IDE, you will need console. The author of [DeathStar](https://github.com/byt3bl33d3r/DeathStar), already knew that while developing that script that automates the 0wning of Domain Admin using Empire. I borrowed his idea but adapted his threading approach for Empire 2.1 since his approach won't work for the refactored start restful api function. Source: [https://gist.github.com/jymcheong/6a7668ecf73c29dd1d234d1c76ef438c](https://gist.github.com/jymcheong/6a7668ecf73c29dd1d234d1c76ef438c)
 
 ## Credits
 Shout outz to @radioboyQ for his/her EmpireAPIWrapper which I extended for this & to @byt3bl33d3r, MTFBWU. 
