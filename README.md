@@ -8,7 +8,7 @@ In my case, the tactics are organized as per my [Attack Life Cycle model](https:
 
 ![](screenshots/ALCmatrix.png)
 
-Each "Tactics" row is associated to a "Stage". If you look into the source tree, the folder structure reflects the matrix's Tactics column. The matrix in this case also mentioned respective controls for each offensive tactic.
+Each "Tactics" row is associated to a "Stage". If you look into the source tree, the folder structure reflects the matrix's Tactics column. The matrix also mentioned respective controls for each offensive tactic.
 
 ## How does Procedure look like?
 
