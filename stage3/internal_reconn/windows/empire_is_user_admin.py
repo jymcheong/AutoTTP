@@ -32,7 +32,7 @@ def run(API, agent_name):
             return "Local"
     else: # 2nd case, for a domain user, we check if its in Domain/Local Admin 
         target_username = agent_details['username'].split('\\')[1]
-        # options for the module, required options are prefixed
+        # options for the module, required options are prefixed (required_*)
         opts = situational_awareness.network_powerview_get_group.options
         if 'Admin' in API.module_exec_with_result(situational_awareness.network_powerview_get_group.path, \
         {opts.required_agent: agent_name, opts.username: target_username}, agent_name):
