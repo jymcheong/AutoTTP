@@ -30,14 +30,13 @@ def run(API, agent_name):
         target_username = agent_details['username'].replace(agent_details['hostname']+'\\', "")
         if target_username in localadmin_query_result:
             return "Local"
-    else: # 2nd case, for a domain user, we return the higher privilege group ie. Domain
+    else: # 2nd case, for a domain user, we check if its in Domain/Local Admin 
         target_username = agent_details['username'].split('\\')[1]
         # options for the module, required options are prefixed
         opts = situational_awareness.network_powerview_get_group.options
         if 'Admin' in API.module_exec_with_result(situational_awareness.network_powerview_get_group.path, \
-                                        { opts.username: target_username,
-                                        opts.required_agent: agent_name}, agent_name):
-            return 'Domain' # there are other types of admin eg. Enterprise, Schema Admin..            
+        {opts.required_agent: agent_name, opts.username: target_username}, agent_name):
+            return 'Domain' # there are other types of admin eg. Enterprise, Schema Admin..
         # 3rd case, a domain user could be added to local admin group
         if agent_details['username'] in localadmin_query_result:
             return 'Local'
