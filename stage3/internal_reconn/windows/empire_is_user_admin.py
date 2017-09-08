@@ -30,7 +30,7 @@ def run(API, agent_name):
         target_username = agent_details['username'].replace(agent_details['hostname']+'\\', "")
         if target_username in localadmin_query_result:
             return "Local"
-    else: # 2nd case, for a domain user, we check if its in Domain/Local Admin
+    else: # 2nd case, for a domain user, we check if its in Domain/Local Admin group
         target_username = agent_details['username'].split('\\')[1]
         # options for the module, required options are prefixed (required_*)
         opts = situational_awareness.network_powerview_get_group.options
