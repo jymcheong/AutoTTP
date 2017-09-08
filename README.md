@@ -15,7 +15,7 @@ Each "Tactics" row is associated to a "Stage". If you look into the source tree,
 
 ## How does Procedure look like?
 
-![](screenshots/procedureVStechniques.png)
+![](https://raw.githubusercontent.com/jymcheong/AutoTTP/master/screenshots/procedureVStechniques.png)
 
 The [file on the left](https://github.com/jymcheong/AutoTTP/blob/master/bypassUAC_procedure_example.py) is a procedure script, the other one is a [technique script](https://github.com/jymcheong/AutoTTP/blob/master/stage3/internal_reconn/windows/empire_is_user_admin.py). Notice that procedure scripting is not littered with too many Empire specific details, much of the details are encapsulated in the technique script. Procedure scripting should focus on the assets' information eg. hostname/ip, which email to send payload to, which payload technique & so on.
 
