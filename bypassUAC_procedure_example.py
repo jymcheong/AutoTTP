@@ -27,7 +27,7 @@ try:
         print('yeay!!! we got an {0} admin user'.format(admin_type))    
         # you can run Mimikatz or any privilege activities...
 except Exception as e:
-    print("Oops: " + str(e))
     exc_type, exc_obj, exc_tb = sys.exc_info()
     fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
     print(exc_type, fname, exc_tb.tb_lineno)
+    print("Oops: " + str(e))
