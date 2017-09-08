@@ -10,11 +10,11 @@ from empire_settings import *
 def run(API, host_name, need_privilege=False, time_out_sec = 180):
     """
     Returns agent info in a dictionary when found, else None
-    :param API: EmpireAPIWrapper.empireAPI object
-    :param host_name: target's host name
-    :param need_privilege: set to true if need privileged agent
-    :param time_out_sec: time out in seconds
-    :return type: dict
+    \n:param API: EmpireAPIWrapper.empireAPI object
+    \n:param host_name: target's host name
+    \n:param need_privilege: set to true if need privileged agent
+    \n:param time_out_sec: time out in seconds
+    \n:return type: dict
     """
     time_out = time_out_sec
     agent_name = ""

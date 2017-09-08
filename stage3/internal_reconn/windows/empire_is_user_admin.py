@@ -11,9 +11,9 @@ from empire_autocomplete import situational_awareness
 def run(API, agent_name):
     """
     Returns admin type, otherwise None
-    :param API: EmpireAPIWrapper object
-    :param agent_name: name of agent
-    :return type: str or None
+    \n:param API: EmpireAPIWrapper object
+    \n:param agent_name: name of agent
+    \n:return type: str or None
     """
     agent = API.agent_info(agent_name)['agents']
     if len(agent) == 0: # checks for no agents at all or no such agent

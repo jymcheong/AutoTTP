@@ -8,11 +8,11 @@ import empire_autocomplete
 def run(API, agent_name, module_name, listener=None):
     """
         Run given bypassUAC module
-        :param API: EmpireAPIWrapper object
-        :param agent_name: name of existing agent
-        :param module_name: name of bypassUAC method (use empire_autocomplete)
-        :param listener: name of listener. Will use 1st listener if not specified
-        :raise error: if no listeners or specified listener not found
+        \n:param API: EmpireAPIWrapper object
+        \n:param agent_name: name of existing agent
+        \n:param module_name: name of bypassUAC method (use empire_autocomplete)
+        \n:param listener: name of listener. Will use 1st listener if not specified
+        \n:raise error: if no listeners or specified listener not found
     """
     if listener is None:
         listener = API.listeners_get_first()
