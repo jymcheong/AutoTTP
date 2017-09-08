@@ -3,6 +3,7 @@
     be achieved with Empire, Metasploit or whatever pen-test framework that
     supports APIs. In this case, we use Empire.
 """
+import sys, os
 from empire_settings import EMPIRE_SERVER, EMPIRE_USER, EMPIRE_PWD
 from EmpireAPIWrapper import empireAPI
 from empire_autocomplete import privesc
@@ -27,3 +28,6 @@ try:
         # you can run Mimikatz or any privilege activities...
 except Exception as e:
     print("Oops: " + str(e))
+    exc_type, exc_obj, exc_tb = sys.exc_info()
+    fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+    print(exc_type, fname, exc_tb.tb_lineno)
