@@ -4,15 +4,14 @@ from pymetasploit.msfrpc import MsfRpcClient
 " -S = no ssl, - P = password, -f = foreground"
 client = MsfRpcClient('test', server="172.16.199.172", port=55553, ssl=False)
 
-def generate_codes(client, source_code, module_type):
-    source_code += "\nclass {0}(object):".format(module_type)
+def generate_codes(client, source_code, module_type):    
     if module_type == 'exploit':
         modules = client.modules.exploits
     elif module_type == 'payload':
         modules = client.modules.payloads        
     elif module_type == 'post':
         modules = client.modules.post
-
+    source_code += "\nclass {0}(object):".format(module_type)
     for m in modules:
         if m.startswith('windows'): # so let's limit it to windows for now
             e = client.modules.use(module_type, m)        
