@@ -1,4 +1,4 @@
-from metasploit.msfrpc import MsfRpcClient
+from pymetasploit.msfrpc import MsfRpcClient
 
 client = MsfRpcClient('test', server="172.16.199.172", port=55553, ssl=False)
 
