@@ -28,8 +28,13 @@ Add-Type @"
  }
 "@
 
-$h =  (get-process OUTLOOK).MainWindowHandle 
-[SFW]::ShowWindow($h, 3)
+$h =  (get-process OUTLOOK).MainWindowHandle
+if($h) {
+    [SFW]::ShowWindow($h, 3)
+}
+else {
+    start Outlook
+ }
 }
 """
     script_path = "/tmp/showoutlook.ps1"
@@ -56,4 +61,4 @@ $h =  (get-process OUTLOOK).MainWindowHandle
 
 if __name__ == '__main__': # unit test
     API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
-    print(run(API, '1C9ZLT3Y'))
+    print(run(API, 'XCV4E8F9'))
