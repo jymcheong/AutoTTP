@@ -1,6 +1,5 @@
 """
-Brings Outlook foreground if launched earlier 
-& prompts for credentials to deceive user
+Brings Outlook foreground & prompts for credentials to deceive user
 """
 from EmpireAPIWrapper import empireAPI
 from empire_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
