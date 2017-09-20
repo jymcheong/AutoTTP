@@ -15,6 +15,7 @@ def run(API, agent_name):
     """
 
     # Step 1 - Bring outlook foreground
+    # DO NOT add tab to the PSH block
     show_outlook_script = """Function ShowOutlook { 
 Add-Type @"
   using System;
