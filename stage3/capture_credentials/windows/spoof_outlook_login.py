@@ -15,7 +15,8 @@ def run(API, agent_name):
     """
 
     # Step 1 - Bring outlook foreground
-    show_outlook_script = """Function ShowOutlook { 
+    script_path = "/tmp/showoutlook.ps1"
+    show_outlook_PSH_script = """Function ShowOutlook { 
         Add-Type @"
         using System;
         using System.Runtime.InteropServices;
@@ -28,16 +29,15 @@ def run(API, agent_name):
 "@  #DO NOT add tab to this line
 
         $h =  (get-process OUTLOOK).MainWindowHandle
-        if($h) {
+        if($h) { # bring foreground
             [SFW]::ShowWindow($h, 3)
         }
-        else {
+        else { # start a new process
             start Outlook
         }
     }"""
-    script_path = "/tmp/showoutlook.ps1"
     with open(script_path, "w") as text_file:
-        text_file.write(show_outlook_script)
+        text_file.write(show_outlook_PSH_script)
     
     options = management.invoke_script.options
     params = {
