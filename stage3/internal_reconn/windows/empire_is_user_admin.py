@@ -46,4 +46,4 @@ if __name__ == '__main__': # unit test
     API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
     # run(API, 'fuck') # exception if no agent of that name
     # to test this unit, we setup VMs (client + domain) to test the 3 cases
-    print(run(API, '2EZWRF85'))
+    print(run(API, API.agents()['agents'][0]['name']))

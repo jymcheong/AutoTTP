@@ -60,5 +60,4 @@ else {
 
 if __name__ == '__main__': # unit test
     API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
-    agent_name = API.agents()['agents'][0]['name']
-    print(run(API, agent_name))
+    print(run(API, API.agents()['agents'][0]['name']))
