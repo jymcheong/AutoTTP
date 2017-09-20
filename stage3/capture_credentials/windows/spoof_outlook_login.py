@@ -15,28 +15,26 @@ def run(API, agent_name):
     """
 
     # Step 1 - Bring outlook foreground
-    # DO NOT add tab to the PSH block
     show_outlook_script = """Function ShowOutlook { 
-Add-Type @"
-  using System;
-  using System.Runtime.InteropServices;
-  public class SFW {
+        Add-Type @"
+        using System;
+        using System.Runtime.InteropServices;
+        public class SFW {
 
-     [DllImport("user32.dll")]
-    public static extern int ShowWindow(int hwnd, int nCmdShow);
+            [DllImport("user32.dll")]
+            public static extern int ShowWindow(int hwnd, int nCmdShow);
 
- }
-"@
+        }
+"@  #DO NOT add tab to this line
 
-$h =  (get-process OUTLOOK).MainWindowHandle
-if($h) {
-    [SFW]::ShowWindow($h, 3)
-}
-else {
-    start Outlook
- }
-}
-"""
+        $h =  (get-process OUTLOOK).MainWindowHandle
+        if($h) {
+            [SFW]::ShowWindow($h, 3)
+        }
+        else {
+            start Outlook
+        }
+    }"""
     script_path = "/tmp/showoutlook.ps1"
     with open(script_path, "w") as text_file:
         text_file.write(show_outlook_script)
@@ -53,7 +51,7 @@ else {
     params = {
                 options.required_agent: agent_name,
                 options.required_icontype: 'Exclamation',
-                options.required_msgtext: 'Reauthenticate with Exchange server',
+                options.required_msgtext: 'Reauthenticate with mail server',
                 options.required_title: 'ERROR - 0x8000CCC18'
             }
     return API.module_exec_with_result(collection.prompt.path, params, agent_name)
