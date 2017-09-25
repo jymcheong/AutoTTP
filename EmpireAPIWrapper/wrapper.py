@@ -360,6 +360,16 @@ class agents(object):
         final_url = '/api/agents/{}/shell'.format(agent_name)
         return utilties._postURL(self, final_url, payload=options)
     
+    def agent_upload(self, agent_name, options):
+        """
+        Task agent to upload { "filename":"fullpath", "data":BASE64encodedcontent}
+        \n:param agent_name: Agent name
+        \n:param options: Dict of command
+        \n:rtype: dict
+        """
+        final_url = '/api/agents/{}/upload'.format(agent_name)
+        return utilties._postURL(self, final_url, payload=options)
+
     def agent_run_shell_cmd_with_result(self, agent_name, options, timeout=120):
         """
         Task agent to run shell commdn with results returned directly
