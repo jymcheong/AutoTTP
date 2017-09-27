@@ -26,7 +26,7 @@ def run(API, agent_name):
         }
     """
     opts = {'Agent': agent_name, 'command': show_outlook_psh}    
-    API.agent_run_shell_cmd_with_result(agent_name, opts)
+    API.agent_run_shell_cmd(agent_name, opts)
     
     # Step 2 - Prompt for Credentials
     options = collection.prompt.options
