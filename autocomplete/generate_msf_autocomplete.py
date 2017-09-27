@@ -32,11 +32,11 @@ def generate_codes(client, source_code, module_type):
 
 header = '""" This is generated autocomplete helper class for MSF """'
 source_code = generate_codes(client, header, 'payload') 
-with open("msf_payload_autocomplete.py", "w") as text_file:
+with open("msf_payload.py", "w") as text_file:
     text_file.write(source_code)
 source_code = generate_codes(client, header, 'exploit') 
-with open("msf_exploit_autocomplete.py", "w") as text_file:
+with open("msf_exploit.py", "w") as text_file:
     text_file.write(source_code)
 source_code = generate_codes(client, header, 'post') 
-with open("msf_post_autocomplete.py", "w") as text_file:
+with open("msf_post.py", "w") as text_file:
     text_file.write(source_code)
