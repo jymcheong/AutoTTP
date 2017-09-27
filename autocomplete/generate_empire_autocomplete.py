@@ -48,5 +48,5 @@ for k1, v1 in module_classes.items():
         source_code += "\n\n"
 
 # write the source code to a file
-with open("empire_autocomplete.py", "w") as text_file:
+with open("empire.py", "w") as text_file:
     text_file.write(source_code)

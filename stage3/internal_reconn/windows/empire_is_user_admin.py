@@ -6,7 +6,7 @@ but we return the higher of the two types
 """
 from EmpireAPIWrapper import empireAPI
 from empire_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
-from empire_autocomplete import situational_awareness
+from autocomplete.empire import situational_awareness
 
 def run(API, agent_name):
     """

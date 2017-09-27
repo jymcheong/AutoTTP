@@ -3,8 +3,7 @@ Brings Outlook foreground & prompts for credentials to deceive user
 """
 from EmpireAPIWrapper import empireAPI
 from empire_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
-from empire_autocomplete import collection, management
-
+from autocomplete.empire import collection, management
 
 def run(API, agent_name):
     """
