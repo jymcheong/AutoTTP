@@ -8,7 +8,6 @@ id = msf_wait_for_session.run(client, '172.30.1.83')
 shell = client.sessions.session(id)
 shell.write('sysinfo')
 sleep(5)
-r = shell.read()
-print(r)
+print(shell.read())
 
 pass # for breakpoint
