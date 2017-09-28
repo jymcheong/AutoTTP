@@ -2,7 +2,7 @@
 Run various UAC bypass methods available in Empire.
 """
 from EmpireAPIWrapper import empireAPI
-from empire_settings import *
+from c2_settings import *
 import autocomplete.empire 
 
 def run(API, agent_name, module_name, listener=None):

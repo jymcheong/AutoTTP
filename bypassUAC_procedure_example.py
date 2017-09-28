@@ -4,7 +4,7 @@
     supports APIs. In this case, we use Empire.
 """
 import sys, os
-from empire_settings import EMPIRE_SERVER, EMPIRE_USER, EMPIRE_PWD
+from c2_settings import EMPIRE_SERVER, EMPIRE_USER, EMPIRE_PWD
 from EmpireAPIWrapper import empireAPI
 from autocomplete.empire import privesc
 from stage2.external_c2 import empire_wait_for_agent, empire_get_timestamp

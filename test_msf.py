@@ -1,11 +1,12 @@
 " make sure all the modules can import/load"
-from autocomplete.msf_exploit import exploit
-from autocomplete.msf_post import post
-from autocomplete.msf_payload import payload
-
+from pymetasploit.msfrpc import MsfRpcClient
+from c2_settings import MSF_SERVER, MSF_PWD
 # there may be illegal characters, especially within options class variables
 # the import will fail there are illegal characters within class
 # print some stuff
-print(payload.windows_meterpreter_reverse_https.path)
-print(exploit.windows_winrm_winrm_script_exec.path)
-print(post.windows_capture_keylog_recorder.path)
+
+client = MsfRpcClient(MSF_PWD, server=MSF_SERVER,ssl=False)
+
+sessions = client.sessions.list[2]
+
+pass

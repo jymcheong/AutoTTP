@@ -5,7 +5,7 @@ so I used symbolic link which seems to work but it's ugly
 """
 from time import sleep
 from EmpireAPIWrapper import empireAPI
-from empire_settings import *
+from c2_settings import *
 
 def run(API, host_name, need_privilege=False, time_out_sec = 180):
     """

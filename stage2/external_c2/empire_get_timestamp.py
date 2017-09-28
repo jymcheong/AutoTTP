@@ -1,5 +1,5 @@
 from EmpireAPIWrapper import empireAPI
-from empire_settings import *
+from c2_settings import *
 
 
 def run(API, agent_name, time_out_sec = 180):

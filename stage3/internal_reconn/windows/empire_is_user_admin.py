@@ -5,7 +5,7 @@ For domain user, it is possible to be in both local &/or domain administrator gr
 but we return the higher of the two types 
 """
 from EmpireAPIWrapper import empireAPI
-from empire_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
+from c2_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
 from autocomplete.empire import situational_awareness
 
 def run(API, agent_name):
