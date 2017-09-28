@@ -1,15 +1,13 @@
 """ 
-Relative path import gets complicated when we want things to 
-run both at technique & procedural script (many folders above) layers, 
-so I used symbolic link which seems to work but it's ugly
+Wait for an Empire agent with a given hostname or IP address
 """
 from time import sleep
 from EmpireAPIWrapper import empireAPI
-from c2_settings import *
+from c2_settings import EMPIRE_PWD, EMPIRE_SERVER, EMPIRE_USER
 
 def run(API, host_name, need_privilege=False, time_out_sec = 180):
     """
-    Returns agent info in a dictionary when found, else None
+    Returns agent info in a dictionary when found, else raise exception
     \n:param API: EmpireAPIWrapper.empireAPI object
     \n:param host_name: target's host name
     \n:param need_privilege: set to true if need privileged agent
