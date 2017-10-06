@@ -1,3 +1,4 @@
+"""Get timestamp on the target machine"""
 from EmpireAPIWrapper import empireAPI
 from c2_settings import *
 
