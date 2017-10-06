@@ -6,7 +6,7 @@ Automated Tactics Techniques &amp; Procedures. Re-running complex sequences manu
 ## What is TTP?
 ![](screenshots/ttp.png)
 
-In my case, the tactics are organized as per my [Attack Life Cycle model](https://jym.sg). There are other models like [Lockheed Martin's Kill-Chain(R)](http://www.lockheedmartin.com/us/what-we-do/aerospace-defense/cyber/cyber-kill-chain.html), [Mandiant Attack Life Cycle](http://www.iacpcybercenter.org/resource-center/what-is-cyber-crime/cyber-attack-lifecycle/) & [Mitre's ATT&CK](https://attack.mitre.org) (for post-exploitation). Whichever model it my be, *a "Tactic" essentially groups techniques together*, eg. code-execution/run-payload can be achieved with many ways:
+In my case, the tactics are organized as per my [Attack Life Cycle model](https://jym.sg). There are other models like [Lockheed Martin's Kill-Chain(R)](http://www.lockheedmartin.com/us/what-we-do/aerospace-defense/cyber/cyber-kill-chain.html), [Mandiant Attack Life Cycle](http://www.iacpcybercenter.org/resource-center/what-is-cyber-crime/cyber-attack-lifecycle/) & [Mitre's ATT&CK](https://attack.mitre.org) (for post-exploitation). Whichever model it may be, *a "Tactic" essentially groups techniques together*, eg. code-execution/run-payload can be achieved with many ways:
 
 ![](screenshots/ALCmatrix.png)
 
@@ -14,7 +14,7 @@ I use "Stage" to group relevant "Tactics" together. If you look into the source 
 
 ![](screenshots/ALC-3tenetsModel.png)
 
-The venn diagram in the middle of the red cycle is from Dartmouth College's ["Three Tenets for Secure Cyber-Physical System Design and Assessment"](http://www.dartmouth.edu/~gvc/ThreeTenetsSPIE.pdf). It defines the necessary & sufficient conditions, or simply the requirements of any successful physical/logical attacks. I added the red ring (stages) around the venn diagram to illustrate typical offensive flows which ultimately leads to impact of Information Confidentiality, Integrity, & System Availability or Safety if it is related Cyber-Physical (think Critical Information Infrastructure).
+The venn diagram in the middle of the red cycle is from Dartmouth College's ["Three Tenets for Secure Cyber-Physical System Design and Assessment"](http://www.dartmouth.edu/~gvc/ThreeTenetsSPIE.pdf). It defines the necessary & sufficient conditions, or simply the of any successful physical/logical attacks. I added the red ring (stages) around the venn diagram to illustrate typical offensive flows which ultimately leads to impact of Information Confidentiality, Integrity, & System Availability or Safety if it is related Cyber-Physical (think Critical Information Infrastructure).
 
 An attacker can start from Stage 1 and get straight into Stage 4 eg default admin credentials on an publicly exposed admin page. It can be non-linear & recursive in nature. Lateral movement in a network is a good example of recursiveness, it is related to staying within the network. Some would use the notion of initial foothold vs gaining a stronghold within a target network.
 
