@@ -14,7 +14,7 @@ def run(API, agent_name, vsto_zip_backdoor_url='http://192.168.181.1:8000/antisp
     """
     Installs Outlook VSTO backdoor 
     \n:param API: EmpireAPIWrapper object
-    \n:param agent_name: name of Empire agent
+    \n:param agent_name: name of existing session
     \n:param vsto_zip_backdoor_url: URL to download backdoor zip file
     \n:return type: string
     """
