@@ -12,6 +12,7 @@ def run(API, agent_name, script_path='/Users/a/Empire/lib/Invoke-Phant0m.ps1'):
         Stops logging with Invoke-Phant0m
         \n:param API: EmpireAPIWrapper object
         \n:param agent_name: name of existing agent
+        \n:param script_path: change the full path for your environment
     """
     if(API.agents()['agents'][0]['high_integrity'] == 0):
         print('Need admin rights')
