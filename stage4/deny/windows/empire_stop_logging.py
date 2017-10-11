@@ -2,6 +2,7 @@
 Stops Windows Event Logging using Invoke-Phant0m:
 https://github.com/hlldz/Invoke-Phant0m
 Needs admin rights
+Note that in Windows 7, Applications Log still works, the rest are dead eg. sysmon, security
 """
 from EmpireAPIWrapper import empireAPI
 from c2_settings import EMPIRE_PWD, EMPIRE_SERVER, EMPIRE_USER
