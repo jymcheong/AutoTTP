@@ -28,6 +28,5 @@ def run(API, agent_name, module_name, listener=None):
 # for unit testing of each technique
 if __name__ == '__main__':
     API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
-    agent_name = API.agent_get_name('WIN-7JKBJEGBO38')
-    run(API, agent_name, autocomplete.empire.privesc.bypassuac.path)
+    run(API, API.agents()['agents'][0]['name'], autocomplete.empire.privesc.bypassuac.path)
  
