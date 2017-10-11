@@ -4,7 +4,7 @@ https://github.com/hlldz/Invoke-Phant0m
 Needs admin rights
 """
 from EmpireAPIWrapper import empireAPI
-from c2_settings import *
+from c2_settings import EMPIRE_PWD, EMPIRE_SERVER, EMPIRE_USER
 from autocomplete.empire import management
 
 def run(API, agent_name, script_path='/Users/a/Empire/lib/Invoke-Phant0m.ps1'):
