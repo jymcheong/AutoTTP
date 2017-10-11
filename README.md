@@ -16,9 +16,9 @@ I use "Stage" to group relevant "Tactics" together. If you look into the source 
 
 The venn diagram in the middle of the red cycle is from Dartmouth College's ["Three Tenets for Secure Cyber-Physical System Design and Assessment"](http://www.dartmouth.edu/~gvc/ThreeTenetsSPIE.pdf). It defines the necessary & sufficient conditions, or simply the of any successful physical/logical attacks. I added the red ring (stages) around the venn diagram to illustrate typical offensive flows which ultimately leads to impact of Information Confidentiality, Integrity, & System Availability or Safety if it is related Cyber-Physical (think Critical Information Infrastructure).
 
-An attacker can start from Stage 1 and get straight into Stage 4 eg default admin credentials on an publicly exposed admin page. It can be non-linear & recursive in nature. Lateral movement in a network is a good example of recursiveness, it is related to staying within the network. Some would use the notion of initial foothold vs gaining a stronghold within a target network.
+An attacker can start from Stage 1 and get straight into Stage 4 eg. default admin credentials on an publicly exposed admin page. It does not need to be linear (stage 1->2->3->4). After the initial infiltration, s/he could have performed some internal information gathering first before escalating privilege on the first machine & then launching a remote command to another target machine within the same network. 
 
-After the initial infiltration, s/he could have performed some internal information gathering first before escalating privilege on the first machine & then launching a remote command to another target machine within the same network. So for the next victim machine, it is a Stage 2, specifically delivering and running payload(s) which allows the attacker to gain command & control over yet another machine.
+So for the next victim machine, it is a Stage 2; successful payload delivery and execution which allows the attacker to gain command & control over yet another machine.
 
 ## How does Procedure look like?
 
