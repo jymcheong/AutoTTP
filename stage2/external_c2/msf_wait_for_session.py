@@ -21,7 +21,7 @@ def run(client, ip_address, need_privilege=False, meterpreter=True, time_out_sec
             if(value['session_host']==ip_address):
                 shell = client.sessions.session(key)
                 if(meterpreter is True and 'MeterpreterSession' not in str(type(shell))):
-                    continue
+                    continue # eg. target can hv both Shell & Meterpreter session
                 if(not need_privilege):
                     return key
                 else: # MSF is rather different from Empire
