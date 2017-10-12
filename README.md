@@ -16,7 +16,7 @@ I use "Stage" to group relevant "Tactics" together. If you look into the source 
 
 ![](screenshots/ALC-3tenetsModel.png)
 
-The venn diagram in the middle of the red cycle is from Dartmouth College's ["Three Tenets for Secure Cyber-Physical System Design and Assessment"](http://www.dartmouth.edu/~gvc/ThreeTenetsSPIE.pdf). It defines the necessary & sufficient conditions, or simply the of any successful physical/logical attacks. I added the red ring (stages) around the venn diagram to illustrate typical offensive flows which ultimately leads to impact of Information Confidentiality, Integrity, & System Availability or Safety if it is related Cyber-Physical (think Critical Information Infrastructure).
+The venn diagram in the middle of the red cycle is from Dartmouth College's ["Three Tenets for Secure Cyber-Physical System Design and Assessment"](http://www.dartmouth.edu/~gvc/ThreeTenetsSPIE.pdf). It defines the necessary & sufficient conditions, or simply the requirements of any successful physical/logical attacks. I added the red ring (stages) around the venn diagram to illustrate typical offensive flows which ultimately leads to impact of Information Confidentiality, Integrity, & System Availability or Safety if it is related Cyber-Physical (think Critical Information Infrastructure).
 
 An attacker can start from Stage 1 and get straight into Stage 4 eg. default admin credentials on an publicly exposed admin page. It does not need to be linear (stage 1->2->3->4). After the initial infiltration, s/he could have performed some internal information gathering first before escalating privilege on the first machine & then launching a remote command to another target machine within the same network. 
 
