@@ -3,6 +3,8 @@ Automated Tactics Techniques &amp; Procedures. Re-running complex sequences manu
 
 ![](https://raw.githubusercontent.com/jymcheong/AutoTTP/master/screenshots/empireScripting.gif)
 
+Youtube: https://www.youtube.com/watch?v=iE_BT8yE1eU&t=53s (Overview & Selected Techniques Deep-Dive)
+
 ## What is TTP?
 ![](screenshots/ttp.png)
 
