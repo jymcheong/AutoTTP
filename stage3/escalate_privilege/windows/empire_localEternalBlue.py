@@ -5,8 +5,6 @@ Target requirements:
 1. 64bit Windows 7 or 2008 R2 
 2. Not patched
 Use empire_wait_for_agent after this! Call this twice => BSOD
-eb.txt does an IEX on a remote EternalBlue.ps1, gets first NIC IP & runs the exploit 
-against the IP. We want to minimize files onto disk.
 """
 from EmpireAPIWrapper import empireAPI
 from autocomplete.empire import exploitation
@@ -17,7 +15,7 @@ def run(API, agent_name, shellcode):
     Uses EternalBlue to EoP locally 
     \n:param API: EmpireAPIWrapper object
     \n:param agent_name: name of existing session
-    \n:param eternalblue_url: URL to download EB powershell launcher
+    \n:param shellcode: 0xAA, 0xBB format
     \n:return type: output from EBlue PSH
     """
 
