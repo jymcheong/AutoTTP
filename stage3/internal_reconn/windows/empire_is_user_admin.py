@@ -26,8 +26,8 @@ def run(API, agent_name):
         raise ValueError('fail to run "net localgroup Administrator", check empire console')
 
     # first case: for a local user, check if s/he is local admin group
-    if agent_details['hostname'] in agent_details['username']:
-        target_username = agent_details['username'].replace(agent_details['hostname']+'\\', "")
+    if agent_details['hostname'].lower() in agent_details['username'].lower():
+        target_username = agent_details['username'].split('\\')[1]
         if target_username in localadmin_query_result:
             return "Local"
     else: # 2nd case, for a domain user, we check if its in Domain/Local Admin group

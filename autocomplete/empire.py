@@ -89,6 +89,15 @@ class management(object):
 			required_agent = 'Agent'
 			required_contype = 'ConType'
 
+	class disable_rdp(object):
+		"""Disables RDP on the remote machine.
+		"""
+
+		path = 'powershell/management/disable_rdp'
+
+		class options(object):
+			required_agent = 'Agent'
+
 	class spawnas(object):
 		"""Spawn an agent with the specified logon credentials.
 		"""
@@ -239,13 +248,20 @@ class management(object):
 			password = 'Password'
 			required_agent = 'Agent'
 
-	class disable_rdp(object):
-		"""Disables RDP on the remote machine.
+	class reflective_inject(object):
+		"""Utilizes Powershell to to inject a Stephen Fewer formed ReflectivePick which executes PS codefrom memory in a remote process
 		"""
 
-		path = 'powershell/management/disable_rdp'
+		path = 'powershell/management/reflective_inject'
 
 		class options(object):
+			required_listener = 'Listener'
+			procname = 'ProcName'
+			uploadpath = 'UploadPath'
+			proxy = 'Proxy'
+			proxycreds = 'ProxyCreds'
+			useragent = 'UserAgent'
+			arch = 'Arch'
 			required_agent = 'Agent'
 
 	class mailraider_get_subfolders(object):
@@ -385,84 +401,6 @@ class recon(object):
 			required_agent = 'Agent'
 
 class privesc(object):
-	class mcafee_sitelist(object):
-		"""Retrieves the plaintext passwords for found McAfee's SiteList.xml files.
-		"""
-
-		path = 'powershell/privesc/mcafee_sitelist'
-
-		class options(object):
-			required_agent = 'Agent'
-
-	class powerup_service_exe_useradd(object):
-		"""Backs up a service's binary and replaces the original with a binary that creates/adds a local administrator.
-		"""
-
-		path = 'powershell/privesc/powerup/service_exe_useradd'
-
-		class options(object):
-			username = 'UserName'
-			required_servicename = 'ServiceName'
-			localgroup = 'LocalGroup'
-			password = 'Password'
-			required_agent = 'Agent'
-
-	class powerup_write_dllhijacker(object):
-		"""Writes out a hijackable .dll to the specified path along with a stager.bat that's called by the .dll. wlbsctrl.dll works well for Windows 7. The machine will need to be restarted for the privesc to work.
-		"""
-
-		path = 'powershell/privesc/powerup/write_dllhijacker'
-
-		class options(object):
-			proxycreds = 'ProxyCreds'
-			required_dllpath = 'DllPath'
-			required_agent = 'Agent'
-			required_listener = 'Listener'
-			proxy = 'Proxy'
-			useragent = 'UserAgent'
-
-	class powerup_service_stager(object):
-		"""Modifies a target service to execute an Empire stager.
-		"""
-
-		path = 'powershell/privesc/powerup/service_stager'
-
-		class options(object):
-			proxycreds = 'ProxyCreds'
-			required_agent = 'Agent'
-			required_listener = 'Listener'
-			required_servicename = 'ServiceName'
-			proxy = 'Proxy'
-			useragent = 'UserAgent'
-
-	class powerup_service_useradd(object):
-		"""Modifies a target service to create a local user and add it to the local administrators.
-		"""
-
-		path = 'powershell/privesc/powerup/service_useradd'
-
-		class options(object):
-			username = 'UserName'
-			required_servicename = 'ServiceName'
-			localgroup = 'LocalGroup'
-			password = 'Password'
-			required_agent = 'Agent'
-
-	class powerup_service_exe_stager(object):
-		"""Backs up a service's binary and replaces the original with a binary that launches a stager.bat.
-		"""
-
-		path = 'powershell/privesc/powerup/service_exe_stager'
-
-		class options(object):
-			proxycreds = 'ProxyCreds'
-			required_agent = 'Agent'
-			required_listener = 'Listener'
-			required_servicename = 'ServiceName'
-			proxy = 'Proxy'
-			useragent = 'UserAgent'
-			delete = 'Delete'
-
 	class ms16_135(object):
 		"""Spawns a new Listener as SYSTEM by leveraging the MS16-135 local exploit. This exploit is for x64 only and only works on unlocked session. Note: the exploit performs fast windows switching, victim's desktop may flash. A named pipe is also created. Thus, opsec is not guaranteed
 		"""
@@ -476,36 +414,11 @@ class privesc(object):
 			required_agent = 'Agent'
 			proxycreds = 'ProxyCreds'
 
-	class powerup_service_exe_restore(object):
-		"""Restore a backed up service binary.
+	class ms16_032(object):
+		"""Spawns a new Listener as SYSTEM by leveraging the MS16-032 local exploit. Note: ~1/6 times the exploit won't work, may need to retry.
 		"""
 
-		path = 'powershell/privesc/powerup/service_exe_restore'
-
-		class options(object):
-			required_servicename = 'ServiceName'
-			backuppath = 'BackupPath'
-			required_agent = 'Agent'
-
-	class getsystem(object):
-		"""Gets SYSTEM privileges with one of two methods.
-		"""
-
-		path = 'powershell/privesc/getsystem'
-
-		class options(object):
-			revtoself = 'RevToSelf'
-			technique = 'Technique'
-			required_agent = 'Agent'
-			servicename = 'ServiceName'
-			pipename = 'PipeName'
-			whoami = 'WhoAmI'
-
-	class ask(object):
-		"""Leverages Start-Process' -Verb runAs option inside a YES-Required loop to prompt the user for a high integrity context before running the agent code. UAC will report Powershell is requesting Administrator privileges. Because this does not use the BypassUAC DLLs, it should not trigger any AV alerts.
-		"""
-
-		path = 'powershell/privesc/ask'
+		path = 'powershell/privesc/ms16-032'
 
 		class options(object):
 			required_listener = 'Listener'
@@ -549,11 +462,11 @@ class privesc(object):
 			runtime = 'RunTime'
 			wpadport = 'WPADPort'
 
-	class bypassuac_fodhelper(object):
-		"""Bypasses UAC by performing an registry modification for FodHelper (based onhttps://winscripting.blog/2017/05/12/first-entry-welcome-and-uac-bypass/)
+	class bypassuac_eventvwr(object):
+		"""Bypasses UAC by performing an image hijack on the .msc file extension and starting eventvwr.exe. No files are dropped to disk, making this opsec safe.
 		"""
 
-		path = 'powershell/privesc/bypassuac_fodhelper'
+		path = 'powershell/privesc/bypassuac_eventvwr'
 
 		class options(object):
 			required_listener = 'Listener'
@@ -562,53 +475,58 @@ class privesc(object):
 			required_agent = 'Agent'
 			proxycreds = 'ProxyCreds'
 
-	class bypassuac_env(object):
-		"""Bypasses UAC (even with Always Notify level set) by by performing an registry modification of the "windir" value in "Environment" based on James Forshaw findings(https://tyranidslair.blogspot.cz/2017/05/exploiting-environment-variables-in.html)
+	class powerup_service_exe_useradd(object):
+		"""Backs up a service's binary and replaces the original with a binary that creates/adds a local administrator.
 		"""
 
-		path = 'powershell/privesc/bypassuac_env'
+		path = 'powershell/privesc/powerup/service_exe_useradd'
 
 		class options(object):
-			required_listener = 'Listener'
-			useragent = 'UserAgent'
-			proxy = 'Proxy'
+			username = 'UserName'
+			required_servicename = 'ServiceName'
+			localgroup = 'LocalGroup'
+			password = 'Password'
 			required_agent = 'Agent'
+
+	class powerup_service_exe_restore(object):
+		"""Restore a backed up service binary.
+		"""
+
+		path = 'powershell/privesc/powerup/service_exe_restore'
+
+		class options(object):
+			required_servicename = 'ServiceName'
+			backuppath = 'BackupPath'
+			required_agent = 'Agent'
+
+	class powerup_write_dllhijacker(object):
+		"""Writes out a hijackable .dll to the specified path along with a stager.bat that's called by the .dll. wlbsctrl.dll works well for Windows 7. The machine will need to be restarted for the privesc to work.
+		"""
+
+		path = 'powershell/privesc/powerup/write_dllhijacker'
+
+		class options(object):
 			proxycreds = 'ProxyCreds'
-
-	class ms16_032(object):
-		"""Spawns a new Listener as SYSTEM by leveraging the MS16-032 local exploit. Note: ~1/6 times the exploit won't work, may need to retry.
-		"""
-
-		path = 'powershell/privesc/ms16-032'
-
-		class options(object):
+			required_dllpath = 'DllPath'
+			required_agent = 'Agent'
 			required_listener = 'Listener'
-			useragent = 'UserAgent'
 			proxy = 'Proxy'
-			required_agent = 'Agent'
-			proxycreds = 'ProxyCreds'
+			useragent = 'UserAgent'
 
-	class bypassuac(object):
-		"""Runs a BypassUAC attack to escape from a medium integrity process to a high integrity process. This attack was originally discovered by Leo Davidson. Empire uses components of MSF's bypassuac injection implementation as well as an adapted version of PowerSploit's Invoke--Shellcode.ps1 script for backend lifting.
+	class bypassuac_tokenmanipulation(object):
+		"""Bypass UAC module based on the script released by Matt Nelson @enigma0x3 at Derbycon 2017
 		"""
 
-		path = 'powershell/privesc/bypassuac'
+		path = 'powershell/privesc/bypassuac_tokenmanipulation'
 
 		class options(object):
-			required_listener = 'Listener'
-			useragent = 'UserAgent'
-			proxy = 'Proxy'
-			required_agent = 'Agent'
 			proxycreds = 'ProxyCreds'
-
-	class gpp(object):
-		"""Retrieves the plaintext password and other information for accounts pushed through Group Policy Preferences.
-		"""
-
-		path = 'powershell/privesc/gpp'
-
-		class options(object):
 			required_agent = 'Agent'
+			required_host = 'Host'
+			proxy = 'Proxy'
+			useragent = 'UserAgent'
+			required_stager = 'Stager'
+			required_port = 'Port'
 
 	class powerup_allchecks(object):
 		"""Runs all current checks for Windows privesc vectors.
@@ -619,18 +537,14 @@ class privesc(object):
 		class options(object):
 			required_agent = 'Agent'
 
-	class bypassuac_wscript(object):
-		"""Drops wscript.exe and a custom manifest into C:/Windows/ and then proceeds to execute VBScript using the wscript executablewith the new manifest. The VBScript executed by C:/Windows/wscript.exe will run elevated.
+	class mcafee_sitelist(object):
+		"""Retrieves the plaintext passwords for found McAfee's SiteList.xml files.
 		"""
 
-		path = 'powershell/privesc/bypassuac_wscript'
+		path = 'powershell/privesc/mcafee_sitelist'
 
 		class options(object):
-			required_listener = 'Listener'
-			useragent = 'UserAgent'
-			proxy = 'Proxy'
 			required_agent = 'Agent'
-			proxycreds = 'ProxyCreds'
 
 	class bypassuac_sdctlbypass(object):
 		"""Bypasses UAC by performing an registry modification for sdclt (based onhttps://enigma0x3.net/2017/03/17/fileless-uac-bypass-using-sdclt-exe/)
@@ -645,11 +559,128 @@ class privesc(object):
 			required_agent = 'Agent'
 			proxycreds = 'ProxyCreds'
 
-	class bypassuac_eventvwr(object):
-		"""Bypasses UAC by performing an image hijack on the .msc file extension and starting eventvwr.exe. No files are dropped to disk, making this opsec safe.
+	class powerup_service_useradd(object):
+		"""Modifies a target service to create a local user and add it to the local administrators.
 		"""
 
-		path = 'powershell/privesc/bypassuac_eventvwr'
+		path = 'powershell/privesc/powerup/service_useradd'
+
+		class options(object):
+			username = 'UserName'
+			required_servicename = 'ServiceName'
+			localgroup = 'LocalGroup'
+			password = 'Password'
+			required_agent = 'Agent'
+
+	class getsystem(object):
+		"""Gets SYSTEM privileges with one of two methods.
+		"""
+
+		path = 'powershell/privesc/getsystem'
+
+		class options(object):
+			revtoself = 'RevToSelf'
+			technique = 'Technique'
+			required_agent = 'Agent'
+			servicename = 'ServiceName'
+			pipename = 'PipeName'
+			whoami = 'WhoAmI'
+
+	class gpp(object):
+		"""Retrieves the plaintext password and other information for accounts pushed through Group Policy Preferences.
+		"""
+
+		path = 'powershell/privesc/gpp'
+
+		class options(object):
+			required_agent = 'Agent'
+
+	class bypassuac(object):
+		"""Runs a BypassUAC attack to escape from a medium integrity process to a high integrity process. This attack was originally discovered by Leo Davidson. Empire uses components of MSF's bypassuac injection implementation as well as an adapted version of PowerSploit's Invoke--Shellcode.ps1 script for backend lifting.
+		"""
+
+		path = 'powershell/privesc/bypassuac'
+
+		class options(object):
+			required_listener = 'Listener'
+			useragent = 'UserAgent'
+			proxy = 'Proxy'
+			required_agent = 'Agent'
+			proxycreds = 'ProxyCreds'
+
+	class powerup_service_exe_stager(object):
+		"""Backs up a service's binary and replaces the original with a binary that launches a stager.bat.
+		"""
+
+		path = 'powershell/privesc/powerup/service_exe_stager'
+
+		class options(object):
+			proxycreds = 'ProxyCreds'
+			required_agent = 'Agent'
+			required_listener = 'Listener'
+			required_servicename = 'ServiceName'
+			proxy = 'Proxy'
+			useragent = 'UserAgent'
+			delete = 'Delete'
+
+	class ask(object):
+		"""Leverages Start-Process' -Verb runAs option inside a YES-Required loop to prompt the user for a high integrity context before running the agent code. UAC will report Powershell is requesting Administrator privileges. Because this does not use the BypassUAC DLLs, it should not trigger any AV alerts.
+		"""
+
+		path = 'powershell/privesc/ask'
+
+		class options(object):
+			required_listener = 'Listener'
+			useragent = 'UserAgent'
+			proxy = 'Proxy'
+			required_agent = 'Agent'
+			proxycreds = 'ProxyCreds'
+
+	class bypassuac_wscript(object):
+		"""Drops wscript.exe and a custom manifest into C:/Windows/ and then proceeds to execute VBScript using the wscript executablewith the new manifest. The VBScript executed by C:/Windows/wscript.exe will run elevated.
+		"""
+
+		path = 'powershell/privesc/bypassuac_wscript'
+
+		class options(object):
+			required_listener = 'Listener'
+			useragent = 'UserAgent'
+			proxy = 'Proxy'
+			required_agent = 'Agent'
+			proxycreds = 'ProxyCreds'
+
+	class bypassuac_fodhelper(object):
+		"""Bypasses UAC by performing an registry modification for FodHelper (based onhttps://winscripting.blog/2017/05/12/first-entry-welcome-and-uac-bypass/)
+		"""
+
+		path = 'powershell/privesc/bypassuac_fodhelper'
+
+		class options(object):
+			required_listener = 'Listener'
+			useragent = 'UserAgent'
+			proxy = 'Proxy'
+			required_agent = 'Agent'
+			proxycreds = 'ProxyCreds'
+
+	class powerup_service_stager(object):
+		"""Modifies a target service to execute an Empire stager.
+		"""
+
+		path = 'powershell/privesc/powerup/service_stager'
+
+		class options(object):
+			proxycreds = 'ProxyCreds'
+			required_agent = 'Agent'
+			required_listener = 'Listener'
+			required_servicename = 'ServiceName'
+			proxy = 'Proxy'
+			useragent = 'UserAgent'
+
+	class bypassuac_env(object):
+		"""Bypasses UAC (even with Always Notify level set) by by performing an registry modification of the "windir" value in "Environment" based on James Forshaw findings(https://tyranidslair.blogspot.cz/2017/05/exploiting-environment-variables-in.html)
+		"""
+
+		path = 'powershell/privesc/bypassuac_env'
 
 		class options(object):
 			required_listener = 'Listener'
@@ -704,6 +735,7 @@ class situational_awareness(object):
 		class options(object):
 			domain = 'Domain'
 			domaincontroller = 'DomainController'
+			expandobject = 'ExpandObject'
 			required_agent = 'Agent'
 			fulldata = 'FullData'
 			resolvesids = 'ResolveSids'
@@ -1038,6 +1070,7 @@ class situational_awareness(object):
 			required_agent = 'Agent'
 			_4624 = '4624'
 			savedrdp = 'SavedRDP'
+			limit = 'Limit'
 			psscripts = 'PSScripts'
 
 	class network_get_spn(object):
@@ -1128,7 +1161,7 @@ class situational_awareness(object):
 
 		class options(object):
 			filter = 'Filter'
-			required_groupname = 'GroupName'
+			groupname = 'GroupName'
 			domain = 'Domain'
 			domaincontroller = 'DomainController'
 			usematchingrule = 'UseMatchingRule'
@@ -1460,7 +1493,7 @@ class collection(object):
 			required_query = 'Query'
 
 	class keylogger(object):
-		"""Logs keys pressed, time and the active window (when changed).
+		"""Logs keys pressed, time and the active window (when changed) to the keystrokes.txt file. This file is located in the agents downloads directory Empire/downloads/<AgentName>/keystrokes.txt.
 		"""
 
 		path = 'powershell/collection/keylogger'

@@ -377,6 +377,7 @@ class agents(object):
         \n:param options: Dict of command
         \n:rtype: dict
         """
+        self.agent_clear_results(agent_name)
         r = self.agent_run_shell_cmd(agent_name, options)
         return self.agent_get_results(agent_name, r['taskID'], timeout)
 
@@ -399,7 +400,7 @@ class agents(object):
         """
         final_url = '/api/agents/{}/clear'.format(name)
         return utilties._getURL(self, final_url)
-
+    
     def agent_kill(self, name):
         """
         Tasks the specified agent to exit
@@ -407,6 +408,10 @@ class agents(object):
         """
         final_url = '/api/agents/{}/kill'.format(name)
         return utilties._getURL(self, final_url)
+    
+    def agent_clear_results(self, name):
+        final_url = '/api/agents/{}/results'.format(name)
+        return utilties._delURL(self, final_url)
 
     def agent_get_results(self, agent_name, task_id, time_out=120):
         """
@@ -418,10 +423,13 @@ class agents(object):
         final_url = '/api/agents/{}/results'.format(agent_name)
         while time_out > 0:
             r = utilties._getURL(self, final_url)
+            resultstr = ''
             for result in r['results']:
-                if task_id == result['taskID']:
-                    if not result['results'].startswith('Job') or ('\n' in result['results']): 
-                        return result['results']
+                for ar in result['AgentResults']:
+                    if(len(ar) > 0 and ar not in resultstr):
+                        resultstr += ar
+                    if('completed' in resultstr):
+                        return resultstr
             time.sleep(1)
             time_out -= 1
         return None
@@ -557,6 +565,7 @@ class empireAPI(utilties, admin, reporting, stagers, modules, agents, listeners)
         \n:param timeout: time out in seconds integer
         \n:rtype: dict
         """
+        self.agent_clear_results(agent_name)
         r = self.module_exec(module_path, options)
         return self.agent_get_results(agent_name, r['taskID'], timeout)
 
