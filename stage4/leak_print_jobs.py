@@ -1,5 +1,5 @@
 """
-This is the so call "scenario", basically a complex procedure to complete a (sub) mission.
+This is the so call "scenario" (placeholder), basically a complex procedure to complete a (sub) mission.
 In this case, the mission is to leak all print jobs.
 
 Two possibilities:

@@ -1,5 +1,5 @@
 # AutoTTP
-Automated Tactics Techniques &amp; Procedures. Re-running complex sequences manually for regression tests, product evaluations, generate data for researchers & so on can be tedious. I toyed with the idea of making it easier to script [Empire](https://github.com/EmpireProject/Empire) (or any frameworks/products/toolkits that provide APIs like Metasploit (RPC), Cobalt-Strike & so on) using IDE like [Visual Studio Code](https://code.visualstudio.com) (or equivalent). So I started to design AutoTTP. This is still very much work in progress. 
+Automated Tactics Techniques &amp; Procedures. Re-running complex sequences manually for regression tests, product evaluations, generate data for researchers & so on can be tedious. I toyed with the idea of making it easier to script [Empire](https://github.com/EmpireProject/Empire) (or any frameworks/products/toolkits that provide APIs like Metasploit (RPC), Cobalt-Strike & so on) using IDE like [Visual Studio Code](https://code.visualstudio.com) (or equivalent). So I started to design AutoTTP. This is still very much work in progress. *Please use Empire 2.2.*
 
 ![](https://raw.githubusercontent.com/jymcheong/AutoTTP/master/screenshots/empireScripting.gif)
 
