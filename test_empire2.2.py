@@ -4,7 +4,7 @@ Need to re-test
 Test observations:
 - return results not have AgentsResult
 - need clear agent result buffer before issue commands/modules that we want to get results
-- DO NOT run get result via API while interacting with agent in Empire console. It will interfere with RESTapi get agent result
+- DO NOT run get result via API while interacting with agent in Empire console. It will interfere with API get task result.
 """
 from EmpireAPIWrapper import empireAPI
 from c2_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
