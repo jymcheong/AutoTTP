@@ -7,7 +7,7 @@ from pymetasploit.msfrpc import MsfRpcClient
 
 def run(client, ip_address, need_privilege=False, meterpreter=True, time_out_sec = 180):
     """
-    Given an IP, waits for session, else Raise ValueError if timeout
+    Given an IP, waits for session, else return None if timeout
     \n:param client: MsfRpcClient object
     \n:param ip_address: target's IP address
     \n:param need_privilege: set to true if need privileged session
