@@ -428,8 +428,11 @@ class agents(object):
                 for ar in result['AgentResults']:
                     if(len(ar) > 0 and ar not in resultstr):
                         resultstr += ar
-                    if('completed' in resultstr):
+                    if('Job' in resultstr and 'completed' in resultstr):
                         return resultstr
+                    else:
+                        if(len(resultstr) > 0):
+                            return resultstr
             time.sleep(1)
             time_out -= 1
         return None
