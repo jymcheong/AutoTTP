@@ -1,8 +1,7 @@
 """
 Changes in REST API results broke agent_get_results
-Need to re-test
 Test observations:
-- return results not have AgentsResult
+- return results does not have AgentsResult
 - need clear agent result buffer before issue commands/modules that we want to get results
 - DO NOT run get result via API while interacting with agent in Empire console. It will interfere with API get task result.
 """
