@@ -36,6 +36,7 @@ that I tested on. Using PAYLOAD windows/x64/meterpreter/reverse_https also tend 
 So I resorted to windows/x64/exec which is NOT Opsec safe due to
 a momentary session-0 appearance at task bar. It's a trade-off since 
 it can reliably start an Empire agent w/o crashing the target. 
+Interesting to note that even though the output says FAIL, the exec shellcode actually ran
 
 Btw, this will give u a session even the user is NOT login.
 Feel free to change this if you have a better approach!
