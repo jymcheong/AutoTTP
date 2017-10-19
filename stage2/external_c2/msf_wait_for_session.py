@@ -5,7 +5,7 @@ from time import sleep
 from c2_settings import MSF_SERVER, MSF_PWD
 from pymetasploit.msfrpc import MsfRpcClient
 
-def run(client, ip_address, need_privilege=False, meterpreter=True, time_out_sec = 180):
+def run(client, ip_address='', need_privilege=False, meterpreter=True, time_out_sec = 180):
     """
     Given an IP, waits for session, else return None if timeout
     \n:param client: MsfRpcClient object
@@ -18,7 +18,7 @@ def run(client, ip_address, need_privilege=False, meterpreter=True, time_out_sec
     time_out = time_out_sec
     while time_out > 0:
         for key, value in client.sessions.list.items():
-            if(value['session_host']==ip_address):
+            if(ip_address in str(value)):
                 shell = client.sessions.session(key)
                 if(meterpreter is True and 'MeterpreterSession' not in str(type(shell))):
                     continue # eg. target can hv both Shell & Meterpreter session

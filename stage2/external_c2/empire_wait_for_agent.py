@@ -5,11 +5,11 @@ from time import sleep
 from EmpireAPIWrapper import empireAPI
 from c2_settings import EMPIRE_PWD, EMPIRE_SERVER, EMPIRE_USER
 
-def run(API, host_name, need_privilege=False, time_out_sec = 180):
+def run(API, host_name='', need_privilege=False, time_out_sec = 180):
     """
     Returns agent info in a dictionary when found, else raise exception
     \n:param API: EmpireAPIWrapper.empireAPI object
-    \n:param host_name: target's host name
+    \n:param host_name: target's host name or leave it blank to get first agent
     \n:param need_privilege: set to true if need privileged agent
     \n:param time_out_sec: time out in seconds
     \n:return type: dict
