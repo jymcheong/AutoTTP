@@ -449,7 +449,7 @@ class agents(object):
         if len(r['agents']) == 0: 
             return agent_name
         for agent in r['agents']:
-            if agent['hostname'].lower()    == hostname_or_ipaddr.lower() or \
+            if agent['hostname'].lower() == hostname_or_ipaddr.lower() or \
                agent['external_ip'].lower() == hostname_or_ipaddr.lower() or \
                agent['internal_ip'].lower() == hostname_or_ipaddr.lower():
                 if agent['high_integrity'] == 0 and high_integrity is False:
