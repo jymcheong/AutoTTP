@@ -3,7 +3,7 @@ This procedure script demonstrates lateral Remote Code Execution:
 1. Waiting for initial meterpreter sesion from pivot node (.191)
 2. Start MSF autoroute on pivot node
 3. Launch EternalBlue thru pivot to adjacent target (.196)
-4. Starts an Empire agent from earlier step
+4. Wait for Empire session from earlier step
 
 Demo: https://www.youtube.com/watch?v=xI0cSbGo4ZY
 
