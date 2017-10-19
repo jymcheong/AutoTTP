@@ -5,6 +5,8 @@ This procedure script demonstrates lateral Remote Code Execution:
 3. Launch EternalBlue thru pivot to adjacent target (.196)
 4. Starts an Empire agent from earlier step
 
+Demo: https://www.youtube.com/watch?v=xI0cSbGo4ZY
+
 In reality, one would perform a scan after step 2 & check if target is vulnerable
 """
 from c2_settings import *
