@@ -23,6 +23,7 @@ def run(client, ip_address='', need_privilege=False, meterpreter=True, time_out_
                 if(meterpreter is True and 'MeterpreterSession' not in str(type(shell))):
                     continue # eg. target can hv both Shell & Meterpreter session
                 if(not need_privilege):
+                    sleep(10) # let session fully establish
                     return key
                 else: # MSF is rather different from Empire
                     shell = client.sessions.session(key)
@@ -37,6 +38,7 @@ def run(client, ip_address='', need_privilege=False, meterpreter=True, time_out_
                         if (time_out < 0):
                             raise ValueError('Wait for session timeout')                        
                     if("got system" in r): # return only when got system
+                        sleep(10) # let session fully establish
                         return key
             
         time_out -= 1
