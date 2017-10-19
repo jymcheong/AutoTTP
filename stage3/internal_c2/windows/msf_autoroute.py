@@ -11,8 +11,9 @@ through the session when pivoting.
 """
 from c2_settings import MSF_SERVER, MSF_PWD
 from pymetasploit.msfrpc import MsfRpcClient
+from time import sleep
 
-def run(client, SESSION, CMD='autoadd', NETMASK='255.255.255.0', SUBNET=''):
+def run(client, SESSION, CMD='', NETMASK='', SUBNET=''):
     """
     Setup autoroute for pivoting via existing Meterpreter session
     \n:param client: MsfRpcClient object
@@ -25,9 +26,11 @@ def run(client, SESSION, CMD='autoadd', NETMASK='255.255.255.0', SUBNET=''):
     console = client.consoles.console()
     # copy from Armitage
     console.write('use post/multi/manage/autoroute')
-    console.write('set NETMASK {0}'.format(NETMASK))
     console.write('set SESSION {0}'.format(SESSION))
-    console.write('set CMD {0}'.format(CMD))
+    if(CMD is not ''):
+        console.write('set CMD {0}'.format(CMD))
+    if(NETMASK is not ''):
+        console.write('set NETMASK {0}'.format(NETMASK))
     if(SUBNET is not ''):
         console.write('set SUBNET {0}'.format(SUBNET))
     console.write('run -j')
