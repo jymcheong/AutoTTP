@@ -35,6 +35,7 @@ def run(client, SESSION, CMD='', NETMASK='', SUBNET=''):
     if(SUBNET is not ''):
         console.write('set SUBNET {0}'.format(SUBNET))
     console.write('run -j')
+    sleep(3)
     subnets = list()
     while True:
         r = console.read()
@@ -45,7 +46,7 @@ def run(client, SESSION, CMD='', NETMASK='', SUBNET=''):
                 continue
             for line in r['data'].split('\n'):
                 if 'Route added' in line:
-                    subnets.append(line[line.find('subnet') + 6:line.find('from')-1])
+                    subnets.append(line[line.find('subnet') + 7:line.find('from')-1])
             return subnets
 
 # for unit testing of each technique
