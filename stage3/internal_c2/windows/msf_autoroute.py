@@ -21,6 +21,7 @@ def run(client, SESSION, CMD='', NETMASK='', SUBNET=''):
     \n:param CMD: add, *autoadd, print, delete, default
     \n:param NETMASK: Netmask eg. IPv4 as "255.255.255.0" or CIDR as "/24"
     \n:param SUBNET: Subnet (IPv4, for example, 10.10.10.0)
+    \n:return type: list of routes added
     """
 
     console = client.consoles.console()
@@ -34,10 +35,22 @@ def run(client, SESSION, CMD='', NETMASK='', SUBNET=''):
     if(SUBNET is not ''):
         console.write('set SUBNET {0}'.format(SUBNET))
     console.write('run -j')
-
+    subnets = list()
+    while True:
+        r = console.read()
+        if len(r['data']) > 0:
+            if 'Did not find' in r['data']:
+                break
+            if 'Route added' not in r['data']:
+                continue
+            for line in r['data'].split('\n'):
+                if 'Route added' in line:
+                    subnets.append(line[line.find('subnet') + 6:line.find('from')-1])
+            return subnets
 
 # for unit testing of each technique
 if __name__ == '__main__':
     client = MsfRpcClient(MSF_PWD, server=MSF_SERVER,ssl=False)
-    # autoadd is easiest, but one can be more specific:
-    run(client, 5, CMD='add', NETMASK='/24', SUBNET='192.168.181.0')
+    from stage2.external_c2 import msf_wait_for_session
+    id = msf_wait_for_session.run(client)
+    run(client, id)
