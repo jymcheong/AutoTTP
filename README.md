@@ -46,7 +46,7 @@ With IDEs like Visual Studio Code (or equivalent), one can take advantage of deb
 ## Empire with RESTful API listener & Console
 As much we want to do everything in IDE, you will need console. The author of [DeathStar](https://github.com/byt3bl33d3r/DeathStar), already knew that while developing that script that automates the 0wning of Domain Admin using Empire. I borrowed his idea but adapted his threading approach for Empire 2.1 since his approach won't work for the refactored start restful api function. Source: [https://gist.github.com/jymcheong/6a7668ecf73c29dd1d234d1c76ef438c](https://gist.github.com/jymcheong/6a7668ecf73c29dd1d234d1c76ef438c)
 
-There is NO need to hack empire script since Empire 2.1 has the command loop handler while running REST mode. *However DO NOT interact with agent while using API to get agent result.*
+There is NO need to hack empire script since Empire 2.2 has the command loop handler while running REST mode. *However DO NOT interact with agent while using API to get agent result.*
 
 ## Credits
 Shout outz to @radioboyQ for his EmpireAPIWrapper, @allfro & @Mikaayenson for pymetasploit, & to @byt3bl33d3r, MTFBWU. 
