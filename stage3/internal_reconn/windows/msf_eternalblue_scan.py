@@ -10,7 +10,7 @@ from time import sleep
 
 def run(client, RHOSTS, THREADS=''):
     """
-    Setup autoroute for pivoting via existing Meterpreter session
+    Scans a network for vulnerable (to EternalBlue) targets
     \n:param client: MsfRpcClient object
     \n:param SESSION: numeric session id
     \n:param RHOSTS: range eg. 10.10.10.1-254 
