@@ -1,10 +1,10 @@
 """
 This procedure script demonstrates lateral Remote Code Execution:
-1. Waiting for initial meterpreter sesion from pivot node (.191)
+1. Waiting for initial meterpreter sesion from pivot node
 2. Get pivot IP address
 3. Start MSF autoroute on pivot node
 4. Do a vulnerable (to EternalBlue) target(s) scan
-5. Launch EternalBlue thru pivot to adjacent target (.196)
+5. Launch EternalBlue thru pivot to adjacent target
 6. Wait for Empire session from earlier step
 
 Demo: https://www.youtube.com/watch?v=xI0cSbGo4ZY
