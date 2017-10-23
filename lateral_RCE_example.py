@@ -40,6 +40,7 @@ print('Added route(s): ' + str(routes))
 for r in routes:
     if '255.255.255.0' in r: # 1-254 takes a long time to scan
         pivot_range = r.replace('.0/255.255.255.0','.190-200') 
+        break # assume 1 class C network in test environment
 
 # Step 4 - Scan for targets
 print('Scanning for vulnerable targets within pivot range ' + pivot_range)
