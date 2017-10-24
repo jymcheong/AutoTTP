@@ -15,4 +15,6 @@ case #2: setup a file-share on the pivot, configure printer to write all jobs to
 
 Latter case is a little more complex but both cases are good illustration of 
 internal pivot using port-forwarding to remotely access printer admin UI.
+
+Details: https://github.com/RUB-NDS/PRET
 """
