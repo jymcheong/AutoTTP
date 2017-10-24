@@ -7,7 +7,7 @@ from pymetasploit.msfrpc import MsfRpcClient
 
 def run(client, ip_address='', need_privilege=False, meterpreter=True, time_out_sec = 180):
     """
-    Given an IP, waits for session, else return None if timeout
+    Given an IP, waits for session, else return None if timeout or fail
     \n:param client: MsfRpcClient object
     \n:param ip_address: target's IP address
     \n:param need_privilege: set to true if need privileged session
@@ -15,39 +15,32 @@ def run(client, ip_address='', need_privilege=False, meterpreter=True, time_out_
     \n:param time_out_sec: time out in seconds
     \n:return type: integer (session id) else None
     """
-    time_out = time_out_sec
-    while time_out > 0:
+
+    while time_out_sec > 0:
         for key, value in client.sessions.list.items():
             if(ip_address in str(value)):
                 shell = client.sessions.session(key)
                 if(meterpreter is True and 'MeterpreterSession' not in str(type(shell))):
                     continue # eg. target can hv both Shell & Meterpreter session
+                while True: # this waits until shell is usable
+                    shell.write('getpid\n')
+                    sleep(5)
+                    if 'Current' in shell.read():
+                        break
                 if(not need_privilege):
-                    r = ''
-                    while True:
-                        shell.write('getpid\n')
-                        sleep(2)
-                        if 'Current' in shell.read():
-                            sleep(5)
-                            return key
-                else: # MSF is rather different from Empire
-                    shell.write('getsystem\n') # needs explicit getsystem
+                    return key
+                else: # need privilege shell
+                    shell.write('getsystem\n') # explicit getsystem
+                    sleep(10) # wait for a while
                     r = shell.read()
-                    while 'Unknown command' in r: # session needs a while to settle
-                        shell.write('getsystem\n')
-                        sleep(5)
-                        r = shell.read()
-                        print(r)
                     if ("denied" in r or 'failed' in r): 
-                        shell.write('whoami')
-                        raise ValueError('getsystem failed')
-                    if (time_out < 0):
-                        raise ValueError('Wait for session timeout')                        
+                        return None
+                    if (time_out_sec < 0):
+                        return None                        
                     if("got system" in r): # return only when got system
-                        sleep(10) # let session fully establish
                         return key
             
-        time_out -= 1
+        time_out_sec -= 1
         sleep(1)
     return None
 
