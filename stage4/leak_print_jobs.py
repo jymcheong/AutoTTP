@@ -1,6 +1,6 @@
 """
 This is the so call "scenario" (placeholder), basically a complex procedure to complete a (sub) mission.
-In this case, the mission is to leak all print jobs.
+In this case, the main objective is to capture all print jobs.
 
 Two possibilities:
 1. MFP has internet access
@@ -19,4 +19,10 @@ internal pivot using port-forwarding to remotely access printer admin UI.
 Details: 
 https://github.com/RUB-NDS/PRET
 http://hacking-printers.net/wiki/index.php/Main_Page
+
+From http://hacking-printers.net/wiki/index.php/Print_job_retention,
+we can see that certain printers supporting PostScript can retain jobs.
+using a pret shell, it possible to start capture, follow by fetch captured jobs.
+Suppose the target printer supports TCP port 9100 printing, a portfwd can be configured
+giving the remote attacker a pret shell to perform the attack.
 """
