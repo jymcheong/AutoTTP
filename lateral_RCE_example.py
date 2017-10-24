@@ -10,7 +10,7 @@ from c2_settings import *
 from EmpireAPIWrapper import empireAPI
 from pymetasploit.msfrpc import MsfRpcClient
 from stage2.external_c2 import msf_wait_for_session, empire_wait_for_agent
-from stage3.internal_reconn.windows import msf_ifconfig, msf_eternalblue_scan
+from stage3.internal_reconn.windows import msf_eternalblue_scan
 from stage3.internal_c2.windows import msf_autoroute
 from stage3.escalate_privilege.windows import msf_eternal_blue
 
