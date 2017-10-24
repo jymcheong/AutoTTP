@@ -1,4 +1,3 @@
-# todo
 """ 
 meterpreter> portfwd add -l 3389 -p 3389 -r 10.10.10.2 
 The example above sets up a RDP port to target 10.10.10.2 
