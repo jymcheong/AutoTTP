@@ -15,8 +15,7 @@ try:
     # use a common API context instead of a new instance per technique script
     API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
     # we assume there's a non-privilege agent, some stager was executed before
-    hostname = 'WIN-7JKBJEGBO38'
-    agent = empire_wait_for_agent.run(API, hostname, False, 5)
+    agent = empire_wait_for_agent.run(API) # gets first agent since no hostname is given
     admin_type = empire_is_user_admin.run(API, agent['name']) 
     # to assist data labelling, we timestamp with reference to target machine
     timestamp = empire_get_timestamp.run(API, agent['name'])
