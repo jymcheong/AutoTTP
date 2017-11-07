@@ -3,7 +3,7 @@ Run various UAC bypass methods available in Empire.
 """
 from EmpireAPIWrapper import empireAPI
 from c2_settings import *
-import autocomplete.empire 
+from autocomplete.empire import privesc 
 
 def run(API, agent_name, module_name, listener=None):
     """
@@ -18,7 +18,7 @@ def run(API, agent_name, module_name, listener=None):
         listener = API.listeners_get_first()
     elif API.listeners_exist(listener) is False:
         raise ValueError('no such listener')
-    opts = autocomplete.empire.privesc.bypassuac.options
+    opts = privesc.bypassuac.options
     options = {
                 opts.required_agent : agent_name,
                 opts.required_listener : listener
@@ -28,5 +28,5 @@ def run(API, agent_name, module_name, listener=None):
 # for unit testing of each technique
 if __name__ == '__main__':
     API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
-    run(API, API.agents()['agents'][0]['name'], autocomplete.empire.privesc.bypassuac.path)
+    run(API, API.agents()['agents'][0]['name'], privesc.bypassuac_wscript.path)
  
