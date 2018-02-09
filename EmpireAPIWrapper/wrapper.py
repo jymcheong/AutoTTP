@@ -426,8 +426,8 @@ class agents(object):
             resultstr = ''
             for result in r['results']:
                 for ar in result['AgentResults']:
-                    if(len(ar) > 0 and ar not in resultstr):
-                        resultstr += ar
+                    if(len(ar) > 0 and ar['results'] not in resultstr):
+                        resultstr += ar['results']
                     if('Job' in resultstr and 'completed' in resultstr):
                         return resultstr
                     else:
