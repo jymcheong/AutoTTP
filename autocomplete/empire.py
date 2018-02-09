@@ -1820,14 +1820,30 @@ class exfiltration(object):
 			required_portrange = 'portrange'
 
 class code_execution(object):
-	class invoke_shellcodemsil(object):
-		"""Execute shellcode within the context of the running PowerShell process without making any Win32 function calls. Warning: This script has no way to validate that your shellcode is 32 vs. 64-bit!Note: Your shellcode must end in a ret (0xC3) and maintain proper stack alignment or PowerShell will crash!
+	class invoke_ntsd(object):
+		"""Use NT Symbolic Debugger to execute Empire launcher code
 		"""
 
-		path = 'powershell/code_execution/invoke_shellcodemsil'
+		path = 'powershell/code_execution/invoke_ntsd'
 
 		class options(object):
-			required_shellcode = 'Shellcode'
+			required_listener = 'Listener'
+			required_binpath = 'BinPath'
+			uploadpath = 'UploadPath'
+			proxy = 'Proxy'
+			proxycreds = 'ProxyCreds'
+			useragent = 'UserAgent'
+			required_arch = 'Arch'
+			required_agent = 'Agent'
+
+	class invoke_metasploitpayload(object):
+		"""Spawns a new, hidden PowerShell window that downloadsand executes a Metasploit payload. This relies on theexploit/multi/scripts/web_delivery metasploit module.
+		"""
+
+		path = 'powershell/code_execution/invoke_metasploitpayload'
+
+		class options(object):
+			required_url = 'URL'
 			required_agent = 'Agent'
 
 	class invoke_dllinjection(object):
@@ -1840,6 +1856,21 @@ class code_execution(object):
 			required_processid = 'ProcessID'
 			required_agent = 'Agent'
 			required_dll = 'Dll'
+
+	class invoke_reflectivepeinjection(object):
+		"""Uses PowerSploit's Invoke-ReflectivePEInjection to reflectively load a DLL/EXE in to the PowerShell process or reflectively load a DLL in to a remote process.
+		"""
+
+		path = 'powershell/code_execution/invoke_reflectivepeinjection'
+
+		class options(object):
+			procid = 'ProcId'
+			required_forceaslr = 'ForceASLR'
+			dllpath = 'DllPath'
+			exeargs = 'ExeArgs'
+			peurl = 'PEUrl'
+			required_agent = 'Agent'
+			computername = 'ComputerName'
 
 	class invoke_shellcode(object):
 		"""Uses PowerSploit's Invoke--Shellcode to inject shellcode into the process ID of your choosing or within the context of the running PowerShell process. If you're injecting custom shellcode, make sure it's in the correct format and matches the architecture of the process you're injecting into.
@@ -1856,30 +1887,15 @@ class code_execution(object):
 			shellcode = 'Shellcode'
 			payload = 'Payload'
 
-	class invoke_metasploitpayload(object):
-		"""Spawns a new, hidden PowerShell window that downloadsand executes a Metasploit payload. This relies on theexploit/multi/scripts/web_delivery metasploit module.
+	class invoke_shellcodemsil(object):
+		"""Execute shellcode within the context of the running PowerShell process without making any Win32 function calls. Warning: This script has no way to validate that your shellcode is 32 vs. 64-bit!Note: Your shellcode must end in a ret (0xC3) and maintain proper stack alignment or PowerShell will crash!
 		"""
 
-		path = 'powershell/code_execution/invoke_metasploitpayload'
+		path = 'powershell/code_execution/invoke_shellcodemsil'
 
 		class options(object):
-			required_url = 'URL'
+			required_shellcode = 'Shellcode'
 			required_agent = 'Agent'
-
-	class invoke_reflectivepeinjection(object):
-		"""Uses PowerSploit's Invoke-ReflectivePEInjection to reflectively load a DLL/EXE in to the PowerShell process or reflectively load a DLL in to a remote process.
-		"""
-
-		path = 'powershell/code_execution/invoke_reflectivepeinjection'
-
-		class options(object):
-			procid = 'ProcId'
-			required_forceaslr = 'ForceASLR'
-			dllpath = 'DllPath'
-			exeargs = 'ExeArgs'
-			peurl = 'PEUrl'
-			required_agent = 'Agent'
-			computername = 'ComputerName'
 
 class trollsploit(object):
 	class rick_ascii(object):
@@ -2372,7 +2388,7 @@ class persistence(object):
 			cleanup = 'Cleanup'
 			adspath = 'ADSPath'
 			required_agent = 'Agent'
-			listener = 'Listener'
+			required_listener = 'Listener'
 			required_keyname = 'KeyName'
 			regpath = 'RegPath'
 			proxy = 'Proxy'
