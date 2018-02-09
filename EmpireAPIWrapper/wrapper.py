@@ -426,13 +426,15 @@ class agents(object):
             resultstr = ''
             for result in r['results']:
                 for ar in result['AgentResults']:
-                    if(len(ar) > 0 and ar['results'] not in resultstr):
-                        resultstr += ar['results']
-                    if('Job' in resultstr and 'completed' in resultstr):
+                    if(ar['taskID'] != task_id): 
+                        continue
+                    resultstr += ar['results']
+                    if('completed' in resultstr):
                         return resultstr
+                    if('Job' in resultstr and 'completed' not in resultstr):
+                        continue
                     else:
-                        if(len(resultstr) > 0):
-                            return resultstr
+                        return resultstr
             time.sleep(1)
             time_out -= 1
         return None

